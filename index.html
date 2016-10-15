@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>host-front</title>
+
+    <script src="js/vendor/jquery-3.1.1.min.js"></script>
+    <script src="js/vendor/angular-1.5.8.min.js"></script>
+    <script src="js/vendor/angular-ui-router-0.3.1.min.js"></script>
+    <script src="js/vendor/angular-ui-bootstrap-tpls-2.2.0.min.js"></script>
+    <script src="js/vendor/bootstrap-3.3.7.min.js"></script>
+    <script src="js/ng-app.js"></script>
+    <script src="js/ng-routes.js"></script>
+    <script src="js/controllers/dashboard.js"></script>
+    <script src="js/controllers/first-list.js"></script>
+    <script src="js/controllers/first-create.js"></script>
+    <script src="js/controllers/first-update.js"></script>
+
+    <link href="css/vendor/bootstrap-3.3.7.min.css" rel="stylesheet">
+
+    <style type="text/css">
+
+        .no-select {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+    </style>
+</head>
+
+<body ng-app="NgApp">
+
+<a ui-sref="dashboard">Dashboard</a>
+<a ui-sref="first-list">First list</a>
+<a ui-sref="first-create">Create first</a>
+
+<hr/>
+
+<div ui-view>
+    ... Loading ...
+</div>
+
+</body>
+
+</html>
