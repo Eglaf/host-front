@@ -13,7 +13,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: 'view/list.html',
             controller: 'FirstListCtrl',
             controllerAs: 'ctrl',
-            resolve: { oResponseData: [function () { return null; }] }
+            resolve: { aoTableContent: [function () { return null; }] }
             // resolve: {
             //     oResponseData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
             //         return _ajax.get('http://tp/back/index.php?ctrl=subscriber&action=load&id=' + $stateParams.id);

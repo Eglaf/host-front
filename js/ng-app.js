@@ -263,7 +263,12 @@
                     if (sWord.length >= iMinLength) {
                         angular.forEach(aProperties, function (sProperty) {
                             if (oHaystack.hasOwnProperty(sProperty)) {
-                                if (oHaystack[sProperty] && ((bCaseSensitive && oHaystack[sProperty].search(sWord) >= 0) || (!bCaseSensitive && oHaystack[sProperty].toLowerCase().search(sWord.toLowerCase()) >= 0))) {
+                                var sHayStackPropertyValue = oHaystack[sProperty];
+                                if (typeof sHayStackPropertyValue === 'number') {
+                                    sHayStackPropertyValue = sHayStackPropertyValue.toString();
+                                }
+
+                                if (sHayStackPropertyValue && ((bCaseSensitive && sHayStackPropertyValue.search(sWord) >= 0) || (!bCaseSensitive && sHayStackPropertyValue.toLowerCase().search(sWord.toLowerCase()) >= 0))) {
                                     bResult = true;
                                 }
                             }
@@ -377,6 +382,36 @@
             },
 
             ///// String functions /////
+
+            /**
+             * ElemId with or without hashtag prefix.
+             * @param {string} sElemId Elem id.
+             * @return {string} ElemId with hashtag prefix.
+             */
+            elemId: function (sElemId) {
+                if (typeof sElemId === 'string' && sElemId.length) {
+                    if (sElemId.charAt(0) == '#') {
+                        return sElemId;
+                    } else {
+                        return ('#' + sElemId);
+                    }
+                } else {
+                    _log('error', 'Invalid elem id. Not string or empty.');
+                }
+            },
+
+            removeElemSelector: function (sElemSel) {
+                console.debug(sElemSel);
+                if (typeof sElemSel === 'string' && sElemSel.length) {
+                    if (sElemSel.charAt(0) == '#' || sElemSel.charAt(0) == '.') {
+                        return sElemSel.substring(1);
+                    } else {
+                        return sElemSel;
+                    }
+                } else {
+                    _log('error', 'Invalid elem selector. Not string or empty.');
+                }
+            },
 
             /**
              * Capitalize string. The first character will be uppercase.
