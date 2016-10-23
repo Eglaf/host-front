@@ -132,7 +132,7 @@ app.factory('_list', ['$rootScope', '$compile', '$filter', '_log', '_func', func
         /**
          * Recalculate the selected content from the global content, then loads the Html code of table content and add it to the table body.
          */
-        loadTableContent: function() {
+        loadTableContent: function () {
             _log('List LoadTableContent()');
 
             this.recalculateContent();
@@ -232,11 +232,24 @@ app.factory('_list', ['$rootScope', '$compile', '$filter', '_log', '_func', func
             var that = this;
 
             if (typeof that.sGlobalSearch === 'string' && that.sGlobalSearch.length >= that.iMinSearchLength) {
+                var aSearchFragments = that.sGlobalSearch.split(' ');
+
                 var aoTempContent = that.aoSelectedContent;
                 that.aoSelectedContent = [];
 
+                var aProps = [];
+                angular.forEach(that.aoHeaders, function (oHeader) {
+                    if (typeof oHeader.search !== 'undefined') {
+                        if (typeof oHeader.prop !== 'undefined') {
+                            aProps.push(oHeader.prop);
+                        } else if (typeof oHeader.func === 'function') {
+                            aProps.push(oHeader.func);
+                        }
+                    }
+                });
+
                 angular.forEach(aoTempContent, function (oRow) {
-                    if (_func.isInObjectTextContent(oRow, ['id', 'label'], that.sGlobalSearch, that.iMinSearchLength, false)) {
+                    if (_func.isInObjectTextContent(oRow, aProps, aSearchFragments, that.iMinSearchLength, false)) {
                         that.aoSelectedContent.push(oRow);
                     }
                 });

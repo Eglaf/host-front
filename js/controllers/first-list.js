@@ -34,8 +34,9 @@
                 }, {
                     text: 'Extended',
                     func: function (obj) {
-                        return obj.label + ' extended';
-                    }
+                        return obj.label + ' extended' + obj.d;
+                    },
+                    search: 'string'
                 }])
                 .setContent(aoTableContent)
                 .loadTable();
@@ -60,22 +61,28 @@
 
             aoTableContent = [{
                 id: 10,
-                label: 'qwer'
+                label: 'qwer',
+                d: 0
             }, {
                 id: 11,
-                label: 'asdf'
+                label: 'asdf',
+                d: 0
             }, {
                 id: 12,
-                label: 'zxcv'
+                label: 'zxcv',
+                d: 0
             }, {
                 id: 13,
-                label: 'qwertyui'
+                label: 'qwertyui',
+                d: 1
             }, {
                 id: 14,
-                label: 'dfghjkl'
+                label: 'dfghjkl',
+                d: 1
             }, {
                 id: 15,
-                label: 'qwerasdfzxcv'
+                label: 'qwerasdfzxcv',
+                d: 1
             }];
         };
 

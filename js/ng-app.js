@@ -262,12 +262,24 @@
                 angular.forEach(aNeedles, function (sWord) {
                     if (sWord.length >= iMinLength) {
                         angular.forEach(aProperties, function (sProperty) {
-                            if (oHaystack.hasOwnProperty(sProperty)) {
-                                var sHayStackPropertyValue = oHaystack[sProperty];
-                                if (typeof sHayStackPropertyValue === 'number') {
-                                    sHayStackPropertyValue = sHayStackPropertyValue.toString();
+                            if (oHaystack.hasOwnProperty(sProperty) || typeof sProperty === 'function') {
+                                var sHayStackPropertyValue = '';
+                                // Method of object.
+                                if (oHaystack[sProperty] === 'function') {
+                                    sHayStackPropertyValue = oHaystack[sProperty]();
                                 }
-
+                                // Function with object parameter.
+                                else if (typeof sProperty === 'function') {
+                                    sHayStackPropertyValue = sProperty(oHaystack);
+                                }
+                                // Number.
+                                else if (typeof oHaystack[sProperty] === 'number') {
+                                    sHayStackPropertyValue = oHaystack[sProperty].toString();
+                                }
+                                // String... probably.
+                                else {
+                                    sHayStackPropertyValue = oHaystack[sProperty];
+                                }
                                 if (sHayStackPropertyValue && ((bCaseSensitive && sHayStackPropertyValue.search(sWord) >= 0) || (!bCaseSensitive && sHayStackPropertyValue.toLowerCase().search(sWord.toLowerCase()) >= 0))) {
                                     bResult = true;
                                 }
@@ -400,6 +412,11 @@
                 }
             },
 
+            /**
+             * Remove the leading hashtag or dot from the string.
+             * @param sElemSel {string} Elem selector (with maybe prefix).
+             * @return {string} Elem selector.
+             */
             removeElemSelector: function (sElemSel) {
                 console.debug(sElemSel);
                 if (typeof sElemSel === 'string' && sElemSel.length) {
@@ -441,6 +458,28 @@
             withLeadingZero: function (iDate, iRepeat) {
                 iRepeat = this.default(iRepeat, 2);
                 return String("0".repeat(iRepeat) + iDate).slice(-iRepeat);
+            },
+
+            ///// Number /////
+
+            /**
+             * Get random float.
+             * @param min {number}
+             * @param max {number}
+             * @return {float}
+             */
+            getRandomFloat: function (min, max) {
+                return Math.random() * (max - min) + min;
+            },
+
+            /**
+             * Get random integer.
+             * @param min {number}
+             * @param max {number}
+             * @return {number} Integer.
+             */
+            getRandomInteger: function (min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
             }
 
         }
