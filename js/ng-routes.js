@@ -8,10 +8,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controllerAs: 'ctrl',
             resolve: { oResponseData: [function () { return null; }] }
         })
-        .state('first-list', {
-            url: '/first/list',
-            templateUrl: 'view/list.html',
-            controller: 'FirstListCtrl',
+        .state('first-table', {
+            url: '/first/table',
+            templateUrl: 'view/table.html',
+            controller: 'FirstTableCtrl',
             controllerAs: 'ctrl',
             resolve: { aoTableContent: [function () { return null; }] }
             // resolve: {

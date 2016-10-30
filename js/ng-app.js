@@ -12,8 +12,7 @@
      * Ng app.
      * In case of ngUi... second parameter array... "ui.bootstrap"
      */
-    // var app = angular.module("NgApp", ['ui.router', 'ui.bootstrap'], function ($interpolateProvider, $httpProvider, $locationProvider) {
-    var app = angular.module("NgApp", ['ui.router'], function ($interpolateProvider, $httpProvider, $locationProvider) {
+    var app = angular.module("NgApp", ['ui.router', 'ui.bootstrap'], function ($interpolateProvider, $httpProvider, $locationProvider) { // var app = angular.module("NgApp", ['ui.router'], function ($interpolateProvider, $httpProvider, $locationProvider) {
 
         //
         // Set the module to use "|[ ]|" to display variables instead of "{{ }}" (because of SF2) or "[[ ]]" (because of Json array).
@@ -162,7 +161,8 @@
     /**
      * Some commonly used function.
      */
-    app.factory("_func", ["_log", function (_log) {
+    app.factory("_func", ["_log", function (_log)
+    {
         return {
 
             /**
@@ -334,11 +334,11 @@
              * Check if the value is in array.
              * @param array {Array} The array to search in.
              * @param value {Mixed} The searched value.
-             * @param bTypeCheck {Boolean} If it's true (which is the default value), then it does type check too.
+             * @param bTypeCheck {Boolean} If it's true , then it does type check too.
              * @return {boolean} True if the element is in array.
              */
             isInArray: function (array, value, bTypeCheck) {
-                bTypeCheck = (typeof bTypeCheck === "undefined" ? true : bTypeCheck);
+                bTypeCheck = (typeof bTypeCheck === "undefined" ? false : bTypeCheck);
                 var bResult = false;
                 angular.forEach(array, function (iteratedValue) {
                     if (bTypeCheck) {
@@ -418,7 +418,6 @@
              * @return {string} Elem selector.
              */
             removeElemSelector: function (sElemSel) {
-                console.debug(sElemSel);
                 if (typeof sElemSel === 'string' && sElemSel.length) {
                     if (sElemSel.charAt(0) == '#' || sElemSel.charAt(0) == '.') {
                         return sElemSel.substring(1);
@@ -458,6 +457,20 @@
             withLeadingZero: function (iDate, iRepeat) {
                 iRepeat = this.default(iRepeat, 2);
                 return String("0".repeat(iRepeat) + iDate).slice(-iRepeat);
+            },
+
+            /**
+             * Replace placeholders in a string. The string has to have "%varName%" in it, but the key need to be only "varName".
+             * @param sText {string}
+             * @param oReplace {Object}
+             * @return {string}
+             */
+            replacePlaceholders: function (sText, oReplace) {
+                angular.forEach(oReplace, function (value, key) {
+                    sText = sText.replace('%' + key + '%', value);
+                });
+
+                return sText;
             },
 
             ///// Number /////

@@ -2,7 +2,7 @@
 
     'use strict';
 
-    app.controller('FirstListCtrl', ['$scope', '$stateParams', '$timeout', '$filter', '_log', '_func', '_list', 'aoTableContent', function ($scope, $stateParams, $timeout, $filter, _log, _func, _list, aoTableContent) {
+    app.controller('FirstTableCtrl', ['$scope', '$stateParams', '$timeout', '$filter', '_log', '_func', '_table', 'aoTableContent', function ($scope, $stateParams, $timeout, $filter, _log, _func, _table, aoTableContent) {
 
         /** @type {object} This controller. */
         var ctrl = this;
@@ -13,13 +13,16 @@
         ctrl.initTable = function () {
             ctrl.useTempData(); // todo test only
 
-            _list
+            _table
                 .setScope($scope)
-                .setContainerElemId('_first_list_container')
+                .setContainerElemId('_first_table_container')
                 .setConfig({
-                    defaultOrderByProperty: 'label',
-                    defaultOrderDirectionReversed: false,
-                    rowsOnPage: 5 // todo
+                    orderByProperty: 'label',
+                    orderDirectionReversed: false,
+                    rowsOnPage: 3
+                })
+                .setTranslations({
+                    globalSearchPlaceholder: 'Search'
                 })
                 .setHeaders([{
                     text: 'ID',
@@ -43,13 +46,13 @@
         };
 
         /**
-         * Call a function of the list service. It's required here to call service functions from view.
-         * @param sFunc {string} Function of list service.
+         * Call a function of the table service. It's required here to call service functions from view.
+         * @param sFunc {string} Function of table service.
          * @param xParam {mixed} Parameter of that function.
          * @return {mixed} It can give back anything.
          */
-        ctrl.callListFunc = function (sFunc, xParam) {
-            return _list.callFromCtrl(sFunc, xParam);
+        ctrl.callTableFunc = function (sFunc, xParam) {
+            return _table.callFromCtrl(sFunc, xParam);
         };
 
 
@@ -83,6 +86,10 @@
                 id: 15,
                 label: 'qwerasdfzxcv',
                 d: 1
+            }, {
+                id: 16,
+                label: 'qwerrewq',
+                d: 2
             }];
         };
 
