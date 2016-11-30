@@ -14,34 +14,17 @@
     <script src="js/ng-routes.js"></script>
     <script src="js/ng-table.js"></script>
 
+    <script src="js/controllers/authenticate.js"></script>
     <script src="js/controllers/dashboard.js"></script>
     <script src="js/controllers/first-table.js"></script>
     <script src="js/controllers/first-create.js"></script>
     <script src="js/controllers/first-update.js"></script>
 
     <link href="css/vendor/bootstrap-3.3.7.min.css" rel="stylesheet">
-
-    <style type="text/css">
-
-        .no-select {
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-    </style>
+    <link href="css/main.css" rel="stylesheet">
 </head>
 
-<body ng-app="NgApp">
-
-<a ui-sref="dashboard">Dashboard</a>
-<a ui-sref="first-table">First list</a>
-<a ui-sref="first-create">Create first</a>
-
-<hr/>
+<body ng-app="NgApp" class="no-select">
 
 <div ui-view>
     ... Loading ...

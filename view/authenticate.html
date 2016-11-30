@@ -1,0 +1,47 @@
+<div class="login-box">
+
+    <p class="alert alert-danger"
+       ng-show="ctrl.isError()"
+       ng-bind-html="ctrl.getError()"></p>
+
+    <form>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="form-control"
+                   ng-model="ctrl.oForm.username"/>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control"
+                   ng-model="ctrl.oForm.password"/>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+    </form>
+
+    <p class="text-center login-quote">
+        Omnem dimittite spem, o vos intrantes!
+    </p>
+
+</div>
+
+<style type="text/css">
+
+    .login-box {
+        width: 470px;
+        padding: 15px;
+        margin: 35px auto;
+        border: solid 1px #e7e7e7;
+        border-radius: 4px 4px 0 0;
+        background: #f8f8f8;
+    }
+
+    .login-quote {
+        margin: 25px 0;
+        color: #666;
+    }
+
+</style>

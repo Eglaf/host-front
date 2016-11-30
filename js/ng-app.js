@@ -1,5 +1,8 @@
 {
 
+    // todo _log.i() _log.e() _log.w() maybe _log()
+    // todo _debug.v() _debug.vv() maybe _debug() too...
+
     "use strict";
 
     /** @type {boolean} It has to be true if you want to see any info in console. */
@@ -535,16 +538,18 @@
 
             /**
              * Simple method to send a post ajax request to the server.
-             * @param sUrl {String} Target Url.
-             * @param oData {Object} Posted data. It works well only if it's in x-www-form-urlencoded format.
-             * @param funcSuccess {Function} It'll run after the ajax request is done. The only parameter is JSON array as result from server.
-             * @param funcError {Function} It'll run after the ajax request is done, but the status isn't 200. The only parameter is the JSON array as result form the server.
+             * @param sUrl {string} Target Url.
+             * @param oData {object} Posted data. It works well only if it's in x-www-form-urlencoded format.
+             * @param funcSuccess {function} It'll run after the ajax request is done. The only parameter is JSON array as result from server.
+             * @param funcError {function} It'll run after the ajax request is done, but the status isn't 200. The only parameter is the JSON array as result form the server.
+             * @param oHeaders {object} Headers if needed. // todo? third param? if func not object, then success instead... or just use _ajax.request... https://docs.angularjs.org/api/ng/service/$http
              */
-            post: function (sUrl, oData, funcSuccess, funcError) {
+            post: function (sUrl, oData, funcSuccess, funcError, oHeaders) {
                 var oRequest = {
                     method: "POST",
                     url: sUrl,
-                    data: oData
+                    data: oData,
+                    headers: oHeaders
                 };
                 return this.request(oRequest, funcSuccess, funcError);
             },
@@ -563,20 +568,19 @@
                     function (oResponse) { // Success
                         _log("Ajax request succeeded.\n" + oRequest.method.toUpperCase() + "=" + oRequest.url);
                         if (typeof funcSuccess === "function") {
-                            funcSuccess(oResponse.data);
+                            funcSuccess(oResponse);
                         }
                         oService.bAjaxRunning = false;
 
-                        return oResponse.data;
+                        return oResponse;
                     },
                     function (oResponse) { // Error
-                        _log("error", (oResponse && oResponse.data && oResponse.data.errorMsg ? oResponse.data.errorMsg : "Invalid error response! Variable response.data.errorMsg is needed."), "Sent data:", oRequest, "Received data:", oResponse);
                         if (typeof funcError === "function") {
-                            funcError(oResponse.data);
+                            funcError(oResponse);
                         }
                         oService.bAjaxRunning = false;
 
-                        return oResponse.data;
+                        return oResponse;
                     }
                 );
             }

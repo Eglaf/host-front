@@ -13,7 +13,7 @@ app.factory('_table', ['$rootScope', '$compile', '$filter', '_log', '_func', fun
         sContainerElemId: '',
 
         /** @type {Object[]} Headers of table. */
-        aoHeaders: [],
+        aoColumns: [],
 
         /** @type {Object[]} Content of table. It contains everything. */
         aoContent: [],
@@ -49,7 +49,7 @@ app.factory('_table', ['$rootScope', '$compile', '$filter', '_log', '_func', fun
         /** @type {Object} Translations. */
         oTrans: {
             contentInfo: 'Showing %from% to %to% of %all% rows.',
-            contentInfoFiltered: 'Showing %from% to %to% of %all% rows (filtered from %total% rows).',
+            contentInfoFiltered: 'Showing %from% to %to% of %all% rows. Filtered from %total% rows.',
             globalSearchPlaceholder: 'Global search'
         },
 
@@ -112,14 +112,14 @@ app.factory('_table', ['$rootScope', '$compile', '$filter', '_log', '_func', fun
         },
 
         /**
-         * Set headers.
-         * @param {Object[]} aoHeaders Column headers.
+         * Set columns.
+         * @param {Object[]} aoColumns Columns.
          * @return {Object} This.
          */
-        setHeaders: function (aoHeaders) {
-            _log('Table setHeaders({Object[]})', aoHeaders);
+        setColumns: function (aoColumns) {
+            _log('Table setColumns({Object[]})', aoColumns);
 
-            this.aoHeaders = aoHeaders;
+            this.aoColumns = aoColumns;
 
             return this;
         },
@@ -163,7 +163,7 @@ app.factory('_table', ['$rootScope', '$compile', '$filter', '_log', '_func', fun
          *************************************************************************************************************************************************************/
 
         /**
-         * Recalculate the selected content from the global content, then loads the Html code of table content and add it to the table body.
+         * Loads the Html code of table content and adds it to the table body.
          */
         loadTableContent: function () {
             _log('Table LoadTableContent()');
@@ -205,12 +205,12 @@ app.factory('_table', ['$rootScope', '$compile', '$filter', '_log', '_func', fun
                 that.aoSelectedContent = [];
 
                 var aSearchProps = [];
-                angular.forEach(that.aoHeaders, function (oHeader) {
-                    if (typeof oHeader.search !== 'undefined') {
-                        if (typeof oHeader.prop !== 'undefined') {
-                            aSearchProps.push(oHeader.prop);
-                        } else if (typeof oHeader.func === 'function') {
-                            aSearchProps.push(oHeader.func);
+                angular.forEach(that.aoColumns, function (oColumn) {
+                    if (typeof oColumn.search !== 'undefined') {
+                        if (typeof oColumn.prop !== 'undefined') {
+                            aSearchProps.push(oColumn.prop);
+                        } else if (typeof oColumn.func === 'function') {
+                            aSearchProps.push(oColumn.func);
                         }
                     }
                 });
@@ -265,7 +265,7 @@ app.factory('_table', ['$rootScope', '$compile', '$filter', '_log', '_func', fun
 
         /**************************************************************************************************************************************************************
          *                                                          **         **         **         **         **         **         **         **         **         **
-         * Event                                                      **         **         **         **         **         **         **         **         **         **
+         * Events                                                     **         **         **         **         **         **         **         **         **         **
          *                                                          **         **         **         **         **         **         **         **         **         **
          *************************************************************************************************************************************************************/
 
@@ -364,7 +364,7 @@ app.factory('_table', ['$rootScope', '$compile', '$filter', '_log', '_func', fun
 
         /**************************************************************************************************************************************************************
          *                                                          **         **         **         **         **         **         **         **         **         **
-         * Private                                                    **         **         **         **         **         **         **         **         **         **
+         * Private methods                                            **         **         **         **         **         **         **         **         **         **
          *                                                          **         **         **         **         **         **         **         **         **         **
          *************************************************************************************************************************************************************/
 
@@ -441,12 +441,12 @@ app.factory('_table', ['$rootScope', '$compile', '$filter', '_log', '_func', fun
             sHtml += '<table id="' + (this.sContainerElemId + '_table') + '" class="table">';
             sHtml += '<thead>';
 
-            angular.forEach(this.aoHeaders, function (oHead) {
-                if (oHead.order) {
-                    sHtml += '<th ng-click="ctrl.callTableFunc(\'setOrder\', \'' + oHead.prop + '\');">' + oHead.text + '</th>';
+            angular.forEach(this.aoColumns, function (oColumn) {
+                if (oColumn.order) {
+                    sHtml += '<th ng-click="ctrl.callTableFunc(\'setOrder\', \'' + oColumn.prop + '\');">' + oColumn.text + '</th>';
                 }
                 else {
-                    sHtml += '<th>' + oHead.text + '</th>';
+                    sHtml += '<th>' + oColumn.text + '</th>';
                 }
             });
 
@@ -506,8 +506,8 @@ app.factory('_table', ['$rootScope', '$compile', '$filter', '_log', '_func', fun
             var sHtml = '';
 
             sHtml += '<tr>';
-            angular.forEach(this.aoHeaders, function (oHead) {
-                sHtml += that.getTableCell(oRow, oHead);
+            angular.forEach(this.aoColumns, function (oColumn) {
+                sHtml += that.getTableCell(oRow, oColumn);
             });
             sHtml += '</tr>';
 
@@ -517,22 +517,21 @@ app.factory('_table', ['$rootScope', '$compile', '$filter', '_log', '_func', fun
         /**
          * Get the content of a cell.
          * @param oRow {Object} Row from content.
-         * @param oHead {Object} Column from header.
+         * @param oColumn {Object} Column.
          * @return {string} Html.
          */
-        getTableCell: function (oRow, oHead) {
+        getTableCell: function (oRow, oColumn) {
             var sHtml = '';
 
             sHtml += '<td>';
             // Show property value.
-            if (oHead.hasOwnProperty('prop')) {
-                sHtml += oRow[oHead.prop];
+            if (oColumn.hasOwnProperty('prop')) {
+                sHtml += oRow[oColumn.prop];
             }
             // Do something with the object, by the given function.
-            else if (oHead.hasOwnProperty('func')) {
-                var fn = oHead['func'];
-                if (typeof fn === 'function') {
-                    sHtml += fn(oRow);
+            else if (oColumn.hasOwnProperty('func')) {
+                if (typeof oColumn['func'] === 'function') {
+                    sHtml += oColumn['func'](oRow);
                 } else {
                     _log('error', 'Table content expects function, got ' + (typeof fn) + ' instead!');
                 }

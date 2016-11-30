@@ -1,8 +1,14 @@
 app.config(function ($stateProvider, $urlRouterProvider) {
 
     $stateProvider
+        .state('authenticate', {
+            url: '/authenticate',
+            templateUrl: 'view/authenticate.html',
+            controller: 'AuthenticateCtrl',
+            controllerAs: 'ctrl'
+        })
         .state('dashboard', {
-            url: '/',
+            url: '/dashboard',
             templateUrl: 'view/dashboard.html',
             controller: 'DashboardCtrl',
             controllerAs: 'ctrl',
@@ -40,6 +46,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             // }
         });
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/authenticate');
 
 });
