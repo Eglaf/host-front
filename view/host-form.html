@@ -1,0 +1,38 @@
+<ng-include src="'view/pre.html'"></ng-include>
+
+<h1 ng-show="ctrl.isUpdate()">Host update</h1>
+<h1 ng-hide="ctrl.isUpdate()">Host create</h1>
+
+<form class="content-box">
+
+    <div class="form-group">
+        <label for="customer">Customer</label>
+        <input type="text" id="customer" class="form-control" placeholder="Enter customer" aria-describedby="customerHelp"
+               ng-model="ctrl.oHost.customer">
+        <small id="customerHelp" class="form-text text-muted">Customer.</small>
+    </div>
+    <div class="form-group">
+        <label for="url">Url</label>
+        <input type="text" id="url" class="form-control" placeholder="Enter url" aria-describedby="urlHelp"
+               ng-model="ctrl.oHost.url">
+        <small id="urlHelp" class="form-text text-muted">Url address.</small>
+    </div>
+    <div class="form-group">
+        <label for="ip">Ip</label>
+        <input type="text" id="ip" class="form-control" placeholder="Enter ip" aria-describedby="ipHelp"
+               ng-model="ctrl.oHost.ip">
+        <small id="ipHelp" class="form-text text-muted">Ip address.</small>
+    </div>
+
+    <button class="btn btn-primary"
+            ng-click="ctrl.submit()">
+        Save
+    </button>
+
+    <a ui-sref="host-list" class="btn btn-default">
+        Back
+    </a>
+
+</form>
+
+<ng-include src="'view/post.html'"></ng-include>

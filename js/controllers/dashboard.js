@@ -2,12 +2,15 @@
 
     'use strict';
 
-    app.controller('DashboardCtrl', ['$scope', '$stateParams', '$timeout', '$filter', '_log', '_func', 'oResponseData', function ($scope, $stateParams, $timeout, $filter, _log, _func, oResponseData) {
+    app.controller('DashboardCtrl', [
+        '$scope', '$state', '$stateParams', '_log', '_func', 'oResponseData',
+        function ($scope, $state, $stateParams, _log, _func, oResponseData) {
 
-        /** @type {object} This controller. */
-        var ctrl = this;
+            /** @type {object} This controller. */
+            var ctrl = this;
 
-        
-    }]);
+            /** @type {string} Name of current route state. */
+            ctrl.sCurrentRoute = $state.current.name;
 
+        }]);
 })();

@@ -1,0 +1,19 @@
+<ng-include src="'view/pre.html'"></ng-include>
+
+<h1>Customers</h1>
+
+<div class="content-box">
+
+    <a ui-sref="customer-create" class="btn btn-primary">
+        Create customer
+    </a>
+
+    <br/>
+
+    <div ng-init="ctrl.initTable();">
+        <div id="_customers_table_container"></div>
+    </div>
+
+</div>
+
+<ng-include src="'view/post.html'"></ng-include>

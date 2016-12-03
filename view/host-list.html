@@ -1,0 +1,19 @@
+<ng-include src="'view/pre.html'"></ng-include>
+
+<h1>Hosts</h1>
+
+<div class="content-box">
+
+    <a ui-sref="host-create" class="btn btn-primary">
+        Create host
+    </a>
+
+    <br/>
+
+    <div ng-init="ctrl.initTable();">
+        <div id="_hosts_table_container"></div>
+    </div>
+
+</div>
+
+<ng-include src="'view/post.html'"></ng-include>

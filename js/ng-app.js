@@ -24,6 +24,10 @@
         $interpolateProvider.startSymbol("|[");
         $interpolateProvider.endSymbol("]|");
 
+        /*$locationProvider.html5Mode({
+         enabled: true,
+         requireBase: false
+         });*/
 
         //
         // PHP can't get Json data from posted requests. With this hack, it'll change the way to encode data.
@@ -164,9 +168,33 @@
     /**
      * Some commonly used function.
      */
-    app.factory("_func", ["_log", function (_log)
-    {
+    app.factory("_func", ["_log", function (_log) {
         return {
+
+            /**
+             * Check variable for boolean.
+             * @param xVar {mixed} Variable to check.
+             * @return {boolean} True or false.
+             */
+            boolVal: function (xVar) {
+                if (xVar === false) {
+                    return false
+                }
+                if (xVar === 0 || xVar === 0.0) {
+                    return false
+                }
+                if (xVar === '' || xVar === '0') {
+                    return false
+                }
+                if (Array.isArray(xVar) && xVar.length === 0) {
+                    return false
+                }
+                if (xVar === null || xVar === undefined) {
+                    return false
+                }
+
+                return true
+            },
 
             /**
              * Set the default value to a variable.

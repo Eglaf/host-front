@@ -1,0 +1,22 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+            <ul class="nav navbar-nav">
+                <li ng-class="{active: ctrl.sCurrentRoute == 'dashboard'}">
+                    <a ui-sref="dashboard">Dashboard</a>
+                </li>
+                <li  ng-class="{active: ctrl.sCurrentRoute.split('-')[0] == 'partner'}">
+                    <a ui-sref="partner-list">Partner list</a>
+                </li>
+                <li  ng-class="{active: ctrl.sCurrentRoute.split('-')[0] == 'customer'}">
+                    <a ui-sref="customer-list">Customer list</a>
+                </li>
+                <li  ng-class="{active: ctrl.sCurrentRoute.split('-')[0] == 'host'}">
+                    <a ui-sref="host-list">Host list</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>

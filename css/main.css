@@ -24,6 +24,26 @@ body {
     user-select: none;
 }
 
+h1 {
+    width: 1100px;
+    margin: 35px auto;
+    font-size: 18px;
+    color: #333;
+}
+
+.content-box {
+    width: 1100px;
+    margin: 35px auto;
+    padding: 25px 50px 75px;
+    background: #f8f8f8;
+    border: solid 1px #d8d8d8;
+    border-radius: 5px;
+}
+
+table > thead > tr > th {
+    cursor: pointer;
+}
+
 /*
  * http://hosting.healthy-websites.com/admin/code/images/arrow-left-100.png
  * http://hosting.healthy-websites.com/admin/code/images/arrow-right-100.png

@@ -6,8 +6,8 @@
      * AuthenticateController
      */
     app.controller('AuthenticateCtrl', [
-        '$rootScope', '_log', '_func', '_ajax',
-        function ($rootScope, _log, _func, _ajax) {
+        '$rootScope', '$state', '_log', '_func', '_ajax',
+        function ($rootScope, $state, _log, _func, _ajax) {
 
             /** @type {object} This controller. */
             var ctrl = this;
@@ -24,7 +24,9 @@
             ctrl.submitLogin = function () {
                 ctrl.sErrorMessage = '';
 
-                ctrl.firstCall(ctrl.oForm.username, ctrl.oForm.password);
+                console.warn('todo');
+                $state.go('dashboard');
+                // ctrl.firstCall(ctrl.oForm.username, ctrl.oForm.password);
             };
 
             /**
