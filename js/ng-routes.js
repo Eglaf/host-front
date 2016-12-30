@@ -198,6 +198,58 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             //     }]
             // }
         })
+        // Host Types
+        .state('hostType-list', {
+            url: '/host-type/list',
+            templateUrl: 'view/host-type-list.html',
+            controller: 'HostTypeListCtrl',
+            controllerAs: 'ctrl',
+            resolve: {
+                aoHostTypesData: [function () {
+                    console.warn('todo');
+                    return [{
+                        id: 1, name: 'htOne', description: 'First host type'
+                    }, {
+                        id: 2, name: 'htTwo', description: 'Second host type'
+                    }, {
+                        id: 3, name: 'htThree', description: 'Third host type'
+                    }]
+                }]
+            }
+            // resolve: {
+            //     aoHostsData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
+            //         return _ajax.get('http://tp/back/index.php?ctrl=subscriber&action=load&id=' + $stateParams.id);
+            //     }]
+            // }
+        })
+        .state('hostType-create', {
+            url: '/host-type/create',
+            templateUrl: 'view/host-type-form.html',
+            controller: 'HostTypeFormCtrl',
+            controllerAs: 'ctrl',
+            resolve: {
+                oHostTypeData: [function () {
+                    return null;
+                }]
+            }
+        })
+        .state('hostType-update', {
+            url: '/host-type/update/{id}',
+            templateUrl: 'view/host-type-form.html',
+            controller: 'HostTypeFormCtrl',
+            controllerAs: 'ctrl',
+            resolve: {
+                oHostTypeData: [function () {
+                    console.warn('todo');
+                    return {id: 4, name: 'htFour', description: 'Fourth hostType'};
+                }]
+            }
+            // resolve: {
+            //     oHostData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
+            //         return _ajax.get('http://tp/back/index.php?ctrl=subscriber&action=load&id=' + $stateParams.id);
+            //     }]
+            // }
+        })
     ;
 
     $urlRouterProvider.otherwise('/authenticate');

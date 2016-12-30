@@ -1,0 +1,32 @@
+<ng-include src="'view/pre.html'"></ng-include>
+
+<h1 ng-show="ctrl.isUpdate()">Host update</h1>
+<h1 ng-hide="ctrl.isUpdate()">Host create</h1>
+
+<form class="content-box">
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" class="form-control" placeholder="Enter name" aria-describedby="nameHelp"
+               ng-model="ctrl.oHostType.name">
+        <small id="nameHelp" class="form-text text-muted">Name.</small>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" id="description" class="form-control" placeholder="Enter description" aria-describedby="descriptionHelp"
+               ng-model="ctrl.oHostType.description">
+        <small id="descriptionHelp" class="form-text text-muted">Description.</small>
+    </div>
+
+    <button class="btn btn-primary"
+            ng-click="ctrl.submit()">
+        Save
+    </button>
+
+    <a ui-sref="hostType-list" class="btn btn-default">
+        Back
+    </a>
+
+</form>
+
+<ng-include src="'view/post.html'"></ng-include>
