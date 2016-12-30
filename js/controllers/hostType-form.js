@@ -3,7 +3,7 @@
     'use strict';
 
     /**
-     * HostTYpe form controller.
+     * HostType form controller.
      */
     app.controller('HostTypeFormCtrl', [
         '$scope', '$state', '$stateParams', '_log', '_func', 'oHostTypeData',

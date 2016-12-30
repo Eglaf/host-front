@@ -201,7 +201,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         // Host Types
         .state('hostType-list', {
             url: '/host-type/list',
-            templateUrl: 'view/host-type-list.html',
+            templateUrl: 'view/hostType-list.html',
             controller: 'HostTypeListCtrl',
             controllerAs: 'ctrl',
             resolve: {
@@ -224,7 +224,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('hostType-create', {
             url: '/host-type/create',
-            templateUrl: 'view/host-type-form.html',
+            templateUrl: 'view/hostType-form.html',
             controller: 'HostTypeFormCtrl',
             controllerAs: 'ctrl',
             resolve: {
@@ -235,7 +235,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('hostType-update', {
             url: '/host-type/update/{id}',
-            templateUrl: 'view/host-type-form.html',
+            templateUrl: 'view/hostType-form.html',
             controller: 'HostTypeFormCtrl',
             controllerAs: 'ctrl',
             resolve: {
