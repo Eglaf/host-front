@@ -3,17 +3,17 @@
     'use strict';
 
     /**
-     * Customer list controller.
+     * PartnerContact list controller.
      */
-    app.controller('CustomerListCtrl', [
-        '$scope', '$state', '$stateParams', '$timeout', '$filter', '_log', '_func', '_table', 'aoCustomersData',
-        function ($scope, $state, $stateParams, $timeout, $filter, _log, _func, _table, aoCustomersData) {
+    app.controller('PartnerContactListCtrl', [
+        '$scope', '$state', '$stateParams', '$timeout', '$filter', '_log', '_func', '_table', 'aoPartnerContactsData',
+        function ($scope, $state, $stateParams, $timeout, $filter, _log, _func, _table, aoPartnerContactsData) {
 
             /** @type {object} This controller. */
             var ctrl = this;
 
-            /** @type {object[]} Customers. */
-            ctrl.aoCustomers = aoCustomersData;
+            /** @type {object[]} Partners. */
+            ctrl.aoPartnerContacts = aoPartnerContactsData;
 
             /** @type {string} Name of current route state. */
             ctrl.sCurrentRoute = $state.current.name;
@@ -24,9 +24,9 @@
             ctrl.initTable = function () {
                 _table
                     .setScope($scope)
-                    .setContainerElemId('_customers_table_container')
+                    .setContainerElemId('_partner_contacts_table_container')
                     .setConfig({
-                        orderByProperty: 'label',
+                        orderByProperty: 'country',
                         orderDirectionReversed: false,
                         rowsOnPage: 5
                     })
@@ -39,26 +39,33 @@
                         search: 'string',
                         order: true
                     }, {
-                        text: 'Email',
-                        prop: 'email',
-                        search: 'string', // todo date (from-to), number(ls/eq/gr), enum(from content)
+                        text: 'Country',
+                        prop: 'country',
+                        search: 'string',
                         order: true
                     }, {
-                        text: 'Partner',
-                        prop: 'partner',
+                        text: 'City',
+                        prop: 'city',
+                        search: 'string',
+                        order: true
+                    }, {
+                        text: 'Address',
+                        prop: 'address',
+                        search: 'string',
+                        order: true
+                    }, {
+                        text: 'Phone',
+                        prop: 'phone',
                         search: 'string',
                         order: true
                     }, {
                         text: '',
                         func: function (obj) {
-                            var sButtons = '';
-                            sButtons += '<a ui-sref="customer-update({id:' + obj.id + '})" class="btn btn-default btn-xs">Update</a> ';
-                            sButtons += '<a ui-sref="customerContact-list({id:' + obj.id + '})" class="btn btn-default btn-xs">Contacts</a> ';
-
-                            return sButtons;
-                        }
+                            return '<a ui-sref="partnerContact-update({id:' + obj.id + '})" class="btn btn-default btn-xs">Update</a>'
+                        },
+                        search: 'string'
                     }])
-                    .setContent(ctrl.aoCustomers)
+                    .setContent(ctrl.aoPartnerContacts)
                     .loadTable();
             };
 

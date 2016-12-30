@@ -38,7 +38,7 @@
                     }, {
                         text: 'Email',
                         prop: 'email',
-                        search: 'string', // todo date (from-to), number(ls/eq/gr), enum(from content)
+                        search: 'string',
                         order: true
                     }, {
                         text: 'Group',
@@ -48,7 +48,11 @@
                     }, {
                         text: '',
                         func: function (obj) {
-                            return '<a ui-sref="partner-update({id:' + obj.id + '})" class="btn btn-default btn-xs">Update</a>'
+                            var sButtons = '';
+                            sButtons += '<a ui-sref="partner-update({id:' + obj.id + '})" class="btn btn-default btn-xs">Update</a> ';
+                            sButtons += '<a ui-sref="partnerContact-list({id:' + obj.id + '})" class="btn btn-default btn-xs">Contacts</a> ';
+
+                            return sButtons;
                         },
                         search: 'string'
                     }])

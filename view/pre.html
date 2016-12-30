@@ -6,10 +6,10 @@
                 <li ng-class="{active: ctrl.sCurrentRoute == 'dashboard'}">
                     <a ui-sref="dashboard">Dashboard</a>
                 </li>
-                <li ng-class="{active: ctrl.sCurrentRoute.split('-')[0] == 'partner'}">
+                <li ng-class="{active: (ctrl.sCurrentRoute.split('-')[0] == 'partner' || ctrl.sCurrentRoute.split('-')[0] == 'partnerContact')}">
                     <a ui-sref="partner-list">Partner list</a>
                 </li>
-                <li ng-class="{active: ctrl.sCurrentRoute.split('-')[0] == 'customer'}">
+                <li ng-class="{active: (ctrl.sCurrentRoute.split('-')[0] == 'customer' || ctrl.sCurrentRoute.split('-')[0] == 'customerContact')}">
                     <a ui-sref="customer-list">Customer list</a>
                 </li>
                 <li ng-class="{active: ctrl.sCurrentRoute.split('-')[0] == 'host'}">
