@@ -436,19 +436,19 @@ app.factory('_table', ['$rootScope', '$compile', '$filter', '_log', '_func', fun
             sHtml += '<input class="form-control pull-right" style="width:300px;" placeholder="' + this.oTrans.globalSearchPlaceholder + '"' +
                 'ng-model="' + this.sContainerElemId + '_globalSearchInTable" ' +
                 'ng-model-options="{ debounce: ' + this.oConfig.delaySearch + ' }" ' +
-                'ng-change="ctrl.callTableFunc(\'setGlobalSearch\', ' + this.sContainerElemId + '_globalSearchInTable);">'; // todo 2nd table? // get TableProp(sGlobalSearch)?
+                'ng-change="ctrl.callTableFunc(\'setGlobalSearch\', ' + this.sContainerElemId + '_globalSearchInTable, \'' + this.sContainerElemId + '\');">';
 
             sHtml += '<table id="' + (this.sContainerElemId + '_table') + '" class="table">';
             sHtml += '<thead>';
 
             angular.forEach(this.aoColumns, function (oColumn) {
                 if (oColumn.order) {
-                    sHtml += '<th ng-click="ctrl.callTableFunc(\'setOrder\', \'' + oColumn.prop + '\');">' + oColumn.text + '</th>';
+                    sHtml += '<th ng-click="ctrl.callTableFunc(\'setOrder\', \'' + oColumn.prop + '\', \'' + this.sContainerElemId + '\');">' + oColumn.text + '</th>';
                 }
                 else {
                     sHtml += '<th>' + oColumn.text + '</th>';
                 }
-            });
+            }, this);
 
             sHtml += '</thead>';
 
@@ -553,7 +553,7 @@ app.factory('_table', ['$rootScope', '$compile', '$filter', '_log', '_func', fun
             // First.
             if (this.iCurrentPage !== 0) {
                 sHtml += '<li>';
-                sHtml += '<a href="#" ng-click="ctrl.callTableFunc(\'goToFirstPage\')">&laquo;</a>';
+                sHtml += '<a href="#" ng-click="ctrl.callTableFunc(\'goToFirstPage\', null, \'' + this.sContainerElemId + '\')">&laquo;</a>';
                 sHtml += '</li>';
             } else {
                 sHtml += '<li class="disabled">';
@@ -565,7 +565,7 @@ app.factory('_table', ['$rootScope', '$compile', '$filter', '_log', '_func', fun
             for (var i = 0; i <= this.getMaxPage(); i++) {
                 if (i - this.oConfig.visibleNeighbourPages <= this.iCurrentPage && i + this.oConfig.visibleNeighbourPages >= this.iCurrentPage) {
                     sHtml += '<li ' + (i === this.iCurrentPage ? 'class="active"' : '') + '>';
-                    sHtml += '<a href="#" ng-click="ctrl.callTableFunc(\'goToPage\',' + i + ')">' + (i + 1) + '</a>';
+                    sHtml += '<a href="#" ng-click="ctrl.callTableFunc(\'goToPage\',' + i + ', \'' + this.sContainerElemId + '\')">' + (i + 1) + '</a>';
                     sHtml += '</li>';
                 }
             }
@@ -573,7 +573,7 @@ app.factory('_table', ['$rootScope', '$compile', '$filter', '_log', '_func', fun
             // Last.
             if (this.iCurrentPage !== this.getMaxPage()) {
                 sHtml += '<li>';
-                sHtml += '<a href="#" ng-click="ctrl.callTableFunc(\'goToLastPage\')">&raquo;</a>';
+                sHtml += '<a href="#" ng-click="ctrl.callTableFunc(\'goToLastPage\', null, \'' + this.sContainerElemId + '\')">&raquo;</a>';
                 sHtml += '</li>';
             } else {
                 sHtml += '<li class="disabled">';

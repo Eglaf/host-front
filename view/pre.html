@@ -6,18 +6,21 @@
                 <li ng-class="{active: ctrl.sCurrentRoute == 'dashboard'}">
                     <a ui-sref="dashboard">Dashboard</a>
                 </li>
-                <li ng-class="{active: (ctrl.sCurrentRoute.split('-')[0] == 'partner' || ctrl.sCurrentRoute.split('-')[0] == 'partnerContact')}">
-                    <a ui-sref="partner-list">Partner list</a>
+                <li ng-class="{active: (ctrl.sCurrentRoute.split('-')[0] == 'users')}">
+                    <a ui-sref="users-list">User list</a>
                 </li>
-                <li ng-class="{active: (ctrl.sCurrentRoute.split('-')[0] == 'customer' || ctrl.sCurrentRoute.split('-')[0] == 'customerContact')}">
+                <li ng-class="{active: (ctrl.sCurrentRoute.split('-')[0] == 'user-reports')}">
+                    <a ui-sref="user-reports-list">User reports</a>
+                </li>
+                <!--<li ng-class="{active: (ctrl.sCurrentRoute.split('-')[0] == 'customer' || ctrl.sCurrentRoute.split('-')[0] == 'customerContact')}">
                     <a ui-sref="customer-list">Customer list</a>
                 </li>
                 <li ng-class="{active: ctrl.sCurrentRoute.split('-')[0] == 'host'}">
                     <a ui-sref="host-list">Host list</a>
-                </li>
-                <li ng-class="{active: ctrl.sCurrentRoute.split('-')[0] == 'hostType'}">
+                </li>-->
+                <!--<li ng-class="{active: ctrl.sCurrentRoute.split('-')[0] == 'hostType'}">
                     <a ui-sref="hostType-list">Host type list</a>
-                </li>
+                </li>-->
             </ul>
 
         </div>

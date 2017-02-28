@@ -7,6 +7,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'AuthenticateCtrl',
             controllerAs: 'ctrl'
         })
+
         .state('dashboard', {
             url: '/dashboard',
             templateUrl: 'view/dashboard.html',
@@ -18,118 +19,33 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
-        // Customers
-        .state('customer-list', {
-            url: '/customer/list',
-            templateUrl: 'view/customer-list.html',
-            controller: 'CustomerListCtrl',
+
+        .state('users-list', {
+            url: '/user/list',
+            templateUrl: 'view/users/list.html',
+            controller: 'UsersListCtrl',
             controllerAs: 'ctrl',
             resolve: {
-                aoCustomersData: [function () {
-                    console.warn('todo');
-                    return [{
-                        id: 1, email: 'customer1@mail.com', partner: 'partner1'
-                    }, {
-                        id: 2, email: 'customer2@mail.com', partner: 'partner1'
-                    }, {
-                        id: 3, email: 'customer3@mail.com', partner: 'partner2'
-                    }, {
-                        id: 4, email: 'customer4@mail.com', partner: 'partner2'
-                    }, {
-                        id: 5, email: 'customer5@mail.com', partner: 'partner3'
-                    }, {
-                        id: 6, email: 'customer6@mail.com', partner: 'partner4'
-                    }, {
-                        id: 7, email: 'customer7@mail.com', partner: 'partner5'
-                    }, {
-                        id: 8, email: 'customer8@mail.com', partner: 'partner6'
-                    }]
-                }]
-            }
-            // resolve: {
-            //     aoCustomersData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
-            //         return _ajax.get('http://tp/back/index.php?ctrl=subscriber&action=load&id=' + $stateParams.id);
-            //     }]
-            // }
-        })
-        .state('customer-create', {
-            url: '/customer/create',
-            templateUrl: 'view/customer-form.html',
-            controller: 'CustomerFormCtrl',
-            controllerAs: 'ctrl',
-            resolve: {
-                oCustomerData: [function () {
-                    return null;
+                aoUsersData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
+                    return _ajax.get('http://host-back/app_dev.php/users/');
                 }]
             }
         })
-        .state('customer-update', {
-            url: '/customer/update/{id}',
-            templateUrl: 'view/customer-form.html',
-            controller: 'CustomerFormCtrl',
+        .state('user-reports-list', {
+            url: '/user/report/list',
+            templateUrl: 'view/users/reportList.html',
+            controller: 'UsersReportListCtrl',
             controllerAs: 'ctrl',
             resolve: {
-                oCustomerData: [function () {
-                    console.warn('todo');
-                    return {id: 20, email: 'some.test@mail.com', group: 'anotherGroup'};
-                }]
-            }
-            // resolve: {
-            //     oCustomerData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
-            //         return _ajax.get('http://tp/back/index.php?ctrl=subscriber&action=load&id=' + $stateParams.id);
-            //     }]
-            // }
-        })
-        // Customer contacts
-        .state('customerContact-list', {
-            url: '/customer-contact/list/{id}',
-            templateUrl: 'view/customerContact-list.html',
-            controller: 'CustomerContactListCtrl',
-            controllerAs: 'ctrl',
-            resolve: {
-                aoCustomerContactsData: [function () {
-                    console.warn('todo');
-                    return [{
-                        id: 1, country: 'Ireland', city: 'Dublin', address: 'Some Street 1.', phone: '+123-456789'
-                    }, {
-                        id: 2, country: 'Ireland', city: 'Aletown', address: 'Beer street 3.', phone: '+333-333-333'
-                    }];
-                }]
-            }
-            // resolve: {
-            //     aoCustomersData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
-            //         return _ajax.get('http://tp/back/index.php?ctrl=subscriber&action=load&id=' + $stateParams.id);
-            //     }]
-            // }
-        })
-        .state('customerContact-create', {
-            url: '/customer-contact/create',
-            templateUrl: 'view/customerContact-form.html',
-            controller: 'CustomerContactFormCtrl',
-            controllerAs: 'ctrl',
-            resolve: {
-                oCustomerContactData: [function () {
-                    return null;
+                aoUsersData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
+                    return _ajax.get('http://host-back/app_dev.php/users/settings/');
                 }]
             }
         })
-        .state('customerContact-update', {
-            url: '/customer-contact/update/{id}',
-            templateUrl: 'view/customerContact-form.html',
-            controller: 'CustomerContactFormCtrl',
-            controllerAs: 'ctrl',
-            resolve: {
-                oCustomerContactData: [function () {
-                    console.warn('todo');
-                    return {id: 666, country: 'Ireland', city: 'Dublin', address: 'Existing Street 0.', phone: '+123-456789'};
-                }]
-            }
-            // resolve: {
-            //     oCustomerData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
-            //         return _ajax.get('http://tp/back/index.php?ctrl=subscriber&action=load&id=' + $stateParams.id);
-            //     }]
-            // }
-        })
+
+
+
+
         // Partners
         .state('partner-list', {
             url: '/partner/list',
@@ -190,59 +106,116 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             //     }]
             // }
         })
-        // Partner contacts
-        .state('partnerContact-list', {
-            url: '/partner-contact/list/{id}',
-            templateUrl: 'view/partnerContact-list.html',
-            controller: 'PartnerContactListCtrl',
+        // Customers
+        .state('customer-list', {
+            url: '/customer/list/{partnerId}',
+            templateUrl: 'view/customer-list.html',
+            controller: 'CustomerListCtrl',
             controllerAs: 'ctrl',
             resolve: {
-                aoPartnerContactsData: [function () {
+                aoCustomersData: [function () {
                     console.warn('todo');
                     return [{
-                        id: 1, country: 'Ireland', city: 'Dublin', address: 'Some Street 1.', phone: '+123-456789'
+                        id: 1, email: 'customer1@mail.com', partner: 'partner1'
                     }, {
-                        id: 2, country: 'Ireland', city: 'Aletown', address: 'Beer street 3.', phone: '+333-333-333'
-                    }];
+                        id: 2, email: 'customer2@mail.com', partner: 'partner1'
+                    }, {
+                        id: 3, email: 'customer3@mail.com', partner: 'partner2'
+                    }, {
+                        id: 4, email: 'customer4@mail.com', partner: 'partner2'
+                    }, {
+                        id: 5, email: 'customer5@mail.com', partner: 'partner3'
+                    }, {
+                        id: 6, email: 'customer6@mail.com', partner: 'partner4'
+                    }, {
+                        id: 7, email: 'customer7@mail.com', partner: 'partner5'
+                    }, {
+                        id: 8, email: 'customer8@mail.com', partner: 'partner6'
+                    }]
                 }]
             }
             // resolve: {
-            //     aoPartnersData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
+            //     aoCustomersData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
             //         return _ajax.get('http://tp/back/index.php?ctrl=subscriber&action=load&id=' + $stateParams.id);
             //     }]
             // }
         })
-        .state('partnerContact-create', {
-            url: '/partner-contact/create',
-            templateUrl: 'view/partnerContact-form.html',
-            controller: 'PartnerContactFormCtrl',
+        .state('customer-create', {
+            url: '/customer/create',
+            templateUrl: 'view/customer-form.html',
+            controller: 'CustomerFormCtrl',
             controllerAs: 'ctrl',
             resolve: {
-                oPartnerContactData: [function () {
+                oCustomerData: [function () {
                     return null;
                 }]
             }
         })
-        .state('partnerContact-update', {
-            url: '/partner-contact/update/{id}',
-            templateUrl: 'view/partnerContact-form.html',
-            controller: 'PartnerContactFormCtrl',
+        .state('customer-update', {
+            url: '/customer/update/{id}',
+            templateUrl: 'view/customer-form.html',
+            controller: 'CustomerFormCtrl',
             controllerAs: 'ctrl',
             resolve: {
-                oPartnerContactData: [function () {
+                oCustomerData: [function () {
                     console.warn('todo');
-                    return {id: 666, country: 'Ireland', city: 'Dublin', address: 'Existing Street 0.', phone: '+123-456789'};
+                    return {id: 20, email: 'some.test@mail.com', group: 'anotherGroup'};
                 }]
             }
             // resolve: {
-            //     oPartnerData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
+            //     oCustomerData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
+            //         return _ajax.get('http://tp/back/index.php?ctrl=subscriber&action=load&id=' + $stateParams.id);
+            //     }]
+            // }
+        })
+        // Contacts
+        .state('contact-list', {
+            url: '/contact/list/{customerId}',
+            templateUrl: 'view/contact-list.html',
+            controller: 'ContactListCtrl',
+            controllerAs: 'ctrl',
+            resolve: {
+                oData: [function () {
+                    console.warn('todo');
+                    return {
+                        customer: {
+                            name: 'Dell'
+                        },
+                        partnerContacts: [{
+                            userId: 2,
+                            contact: 'partnerTest@test.ie'
+                        }, {
+                            userId: 3,
+                            contact: 'mail3@test.ie'
+                        }, {
+                            userId: 4,
+                            contact: 'mail4@test.ie'
+                        }],
+                        customerContacts: [{
+                            userId: 1,
+                            contact: 'clientTest@test.ie'
+                        }, {
+                            userId: 5,
+                            contact: 'superadminTest14@test.ie'
+                        }, {
+                            userId: 4,
+                            contact: 'mail4@test.ie'
+                        }, {
+                            userId: 6,
+                            contact: 'mail6@test.ie'
+                        }]
+                    };
+                }]
+            }
+            // resolve: {
+            //     aoCustomersData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
             //         return _ajax.get('http://tp/back/index.php?ctrl=subscriber&action=load&id=' + $stateParams.id);
             //     }]
             // }
         })
         // Hosts
         .state('host-list', {
-            url: '/host/list',
+            url: '/host/list/{customerId}',
             templateUrl: 'view/host-list.html',
             controller: 'HostListCtrl',
             controllerAs: 'ctrl',
@@ -349,8 +322,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             //         return _ajax.get('http://tp/back/index.php?ctrl=subscriber&action=load&id=' + $stateParams.id);
             //     }]
             // }
-        })
-    ;
+        });
 
     $urlRouterProvider.otherwise('/authenticate');
 

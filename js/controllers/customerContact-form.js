@@ -32,7 +32,7 @@
                 _log('CustomerContactFormCtrl submit');
 
                 // save via ajax
-                $state.go('customerContact-list', {id: 1});
+                $state.go('contact-list', {id: 1});
             }
 
         }]);

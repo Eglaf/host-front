@@ -49,8 +49,8 @@
                         text: '',
                         func: function (obj) {
                             var sButtons = '';
+                            sButtons += '<a ui-sref="customer-list({partnerId:' + obj.id + '})" class="btn btn-default btn-xs">Customers</a> ';
                             sButtons += '<a ui-sref="partner-update({id:' + obj.id + '})" class="btn btn-default btn-xs">Update</a> ';
-                            sButtons += '<a ui-sref="partnerContact-list({id:' + obj.id + '})" class="btn btn-default btn-xs">Contacts</a> ';
 
                             return sButtons;
                         },

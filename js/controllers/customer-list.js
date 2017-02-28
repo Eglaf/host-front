@@ -52,8 +52,9 @@
                         text: '',
                         func: function (obj) {
                             var sButtons = '';
+                            sButtons += '<a ui-sref="host-list({customerId:' + obj.id + '})" class="btn btn-default btn-xs">Hosts</a> ';
+                            sButtons += '<a ui-sref="contact-list({id:' + obj.id + '})" class="btn btn-default btn-xs">Contacts</a> ';
                             sButtons += '<a ui-sref="customer-update({id:' + obj.id + '})" class="btn btn-default btn-xs">Update</a> ';
-                            sButtons += '<a ui-sref="customerContact-list({id:' + obj.id + '})" class="btn btn-default btn-xs">Contacts</a> ';
 
                             return sButtons;
                         }

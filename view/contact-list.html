@@ -1,16 +1,25 @@
 <ng-include src="'view/pre.html'"></ng-include>
 
-<h1>Customer contacts</h1>
+<h1>Contacts</h1>
 
 <div class="content-box">
 
-    <a ui-sref="customerContact-create" class="btn btn-primary">
+   <!-- <a ui-sref="customerContact-create" class="btn btn-primary">
         Create customer contact
-    </a>
+    </a>-->
 
     <br/>
 
-    <div ng-init="ctrl.initTable();">
+    <div ng-init="ctrl.initPartnerTable();">
+        <div id="_partner_contacts_table_container"></div>
+    </div>
+
+    <br />
+    <br />
+    <hr />
+    <br />
+
+    <div ng-init="ctrl.initCustomerTable();">
         <div id="_customer_contacts_table_container"></div>
     </div>
 

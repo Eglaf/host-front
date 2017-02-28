@@ -2,18 +2,15 @@
 
     'use strict';
 
-    /**
-     * PartnerContact list controller.
-     */
-    app.controller('PartnerContactListCtrl', [
-        '$scope', '$state', '$stateParams', '$timeout', '$filter', '_log', '_func', '_table', 'aoPartnerContactsData',
-        function ($scope, $state, $stateParams, $timeout, $filter, _log, _func, _table, aoPartnerContactsData) {
+    app.controller('UsersReportListCtrl', [
+        '$scope', '$state', '$stateParams', '$timeout', '$filter', '_log', '_func', '_table', 'aoUsersData',
+        function ($scope, $state, $stateParams, $timeout, $filter, _log, _func, _table, aoUsersData) {
 
             /** @type {object} This controller. */
             var ctrl = this;
 
-            /** @type {object[]} Partners. */
-            ctrl.aoPartnerContacts = aoPartnerContactsData;
+            /** @type {object[]} Users. */
+            ctrl.aoUsers = aoUsersData;
 
             /** @type {string} Name of current route state. */
             ctrl.sCurrentRoute = $state.current.name;
@@ -22,11 +19,14 @@
              * Initialize.
              */
             ctrl.initTable = function () {
+
+                _log(ctrl.aoUsers);
+
                 _table
                     .setScope($scope)
-                    .setContainerElemId('_partner_contacts_table_container')
+                    .setContainerElemId('_users_table_container')
                     .setConfig({
-                        orderByProperty: 'country',
+                        orderByProperty: 'fullName',
                         orderDirectionReversed: false,
                         rowsOnPage: 5
                     })
@@ -34,38 +34,43 @@
                         globalSearchPlaceholder: 'Search'
                     })
                     .setColumns([{
-                        text: 'ID',
-                        prop: 'id',
+                        text: 'Full name',
+                        prop: 'fullName',
                         search: 'string',
                         order: true
                     }, {
-                        text: 'Country',
-                        prop: 'country',
+                        text: 'Contact',
+                        prop: 'contact',
                         search: 'string',
                         order: true
                     }, {
-                        text: 'City',
-                        prop: 'city',
+                        text: 'Role',
+                        prop: 'role',
                         search: 'string',
                         order: true
                     }, {
-                        text: 'Address',
-                        prop: 'address',
+                        text: 'Phone number',
+                        prop: 'phoneNumber',
                         search: 'string',
                         order: true
                     }, {
-                        text: 'Phone',
-                        prop: 'phone',
+                        text: 'Partner',
+                        prop: 'partner',
                         search: 'string',
                         order: true
                     }, {
                         text: '',
                         func: function (obj) {
-                            return '<a ui-sref="partnerContact-update({id:' + obj.id + '})" class="btn btn-default btn-xs">Update</a>'
-                        },
-                        search: 'string'
+                            var sButtons = '';
+                            // sButtons += '<a ui-sref="customer-list({partnerId:' + obj.id + '})" class="btn btn-default btn-xs">Customers</a> ';
+                            sButtons += '<a href="" class="btn btn-default btn-xs">Flag Phone</a> ';
+                            sButtons += '<a href="" class="btn btn-default btn-xs">Flag Email</a> ';
+                            sButtons += '<a href="" class="btn btn-default btn-xs">Flag report</a> ';
+
+                            return sButtons;
+                        }
                     }])
-                    .setContent(ctrl.aoPartnerContacts)
+                    .setContent(ctrl.aoUsers.data)
                     .loadTable();
             };
 

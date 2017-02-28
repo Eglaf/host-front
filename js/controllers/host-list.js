@@ -43,7 +43,7 @@
                     }, {
                         text: 'Url',
                         prop: 'url',
-                        search: 'string', // todo date (from-to), number(ls/eq/gr), enum(from content)
+                        search: 'string',
                         order: true
                     }, {
                         text: 'Ip',

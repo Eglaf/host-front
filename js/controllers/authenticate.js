@@ -4,6 +4,7 @@
 
     /**
      * AuthenticateController
+     * @todo http://www.jvandemo.com/how-to-configure-your-angularjs-application-using-environment-variables/
      */
     app.controller('AuthenticateCtrl', [
         '$rootScope', '$state', '_log', '_func', '_ajax',
@@ -18,15 +19,16 @@
             /** @type {string} Error message. */
             ctrl.sErrorMessage = '';
 
+            /** @temp */
+            ctrl.sApiCall = 'http://host-back/app_dev.php/';
+
             /**
              * Send login data.
              */
             ctrl.submitLogin = function () {
                 ctrl.sErrorMessage = '';
 
-                console.warn('todo');
-                $state.go('dashboard');
-                // ctrl.firstCall(ctrl.oForm.username, ctrl.oForm.password);
+                ctrl.firstCall(ctrl.oForm.username, ctrl.oForm.password);
             };
 
             /**
@@ -37,7 +39,7 @@
             ctrl.firstCall = function (sUsername, sPassword) {
                 _log('Authentication firstCall()');
 
-                _ajax.post('/login', {
+                _ajax.post(ctrl.sApiCall + 'login/', {
                         username: sUsername,
                         password: sPassword
                     },
@@ -56,7 +58,7 @@
             ctrl.secondCall = function (oFirstResponse) {
                 _log('Authentication secondCall({oFirstResponse})', oFirstResponse);
 
-                _ajax.get('/api/oauth2/authorize', oFirstResponse,
+                _ajax.get(ctrl.sApiCall + 'api/oauth2/authorize/', oFirstResponse,
                     function (oSecondResponse) {
                         ctrl.thirdCall(oFirstResponse, oSecondResponse);
                     }, function (oErrorResponse) {
@@ -72,20 +74,25 @@
             ctrl.thirdCall = function (oFirstResponse, oSecondResponse) {
                 _log('Authentication thirdCall({oFirstResponse}, {oSecondResponse})', [oFirstResponse, oSecondResponse]);
 
-                _ajax.post(oFirstResponse.redirect_uri, {
-                    "grant_type": "authorization_code",
-                    "client_id": oFirstResponse.client_id,
-                    "client_secret": oFirstResponse.client_secret,
-                    "redirect_uri": "token",
-                    "code": oSecondResponse.code
-                },
-                 function (oThirdResponse) {
-                    var sAccessToken = oThirdResponse.accessToken;
-                    var sRefreshToken = oThirdResponse.refreshToken;
-                    _log('third call succeeded... be happy and do something about it... A:' + sAccessToken + ' R:' + sRefreshToken);
-                }, function (oErrorResponse) {
-                    ctrl.errorResponse(oErrorResponse);
-                });
+                console.debug(oFirstResponse.data);
+
+                _ajax.post(ctrl.sApiCall + oFirstResponse.data.redirect_uri, {
+                        "grant_type": "authorization_code",
+                        "client_id": oFirstResponse.data.client_id,
+                        "client_secret": oFirstResponse.data.client_secret,
+                        "redirect_uri": "token",
+                        "code": oSecondResponse.code
+                    },
+                    function (oThirdResponse) {
+                        var sAccessToken = oThirdResponse.data.accessToken;
+                        var sRefreshToken = oThirdResponse.data.refresh_token;
+
+                        _log('third call succeeded... be happy and do something about it... A:' + sAccessToken + ' R:' + sRefreshToken);
+
+                        $state.go('dashboard');
+                    }, function (oErrorResponse) {
+                        ctrl.errorResponse(oErrorResponse);
+                    });
             };
 
             /**
