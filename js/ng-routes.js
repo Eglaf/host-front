@@ -7,7 +7,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'AuthenticateCtrl',
             controllerAs: 'ctrl'
         })
-
+        // Dashboard.
         .state('dashboard', {
             url: '/dashboard',
             templateUrl: 'view/dashboard.html',
@@ -19,7 +19,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
-
+        // Users list.
         .state('users-list', {
             url: '/user/list',
             templateUrl: 'view/users/list.html',
@@ -31,6 +31,19 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
+        // User form.
+        .state('users-password-form', {
+            url: '/user/{userId}/password-change',
+            templateUrl: 'view/users/passwordForm.html',
+            controller: 'UserPasswordFormCtrl',
+            controllerAs: 'ctrl',
+            resolve: {
+                /*oPartnerData: [function () {
+                    return null;
+                }]*/
+            }
+        })
+        // User reports.
         .state('user-reports-list', {
             url: '/user/report/list',
             templateUrl: 'view/users/reportList.html',
@@ -44,7 +57,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         })
 
 
-
+        //
+        // Test stuff...
+        //
 
         // Partners
         .state('partner-list', {
