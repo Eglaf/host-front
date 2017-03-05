@@ -4,7 +4,6 @@
 
     /**
      * AuthenticateController
-     * @todo http://www.jvandemo.com/how-to-configure-your-angularjs-application-using-environment-variables/
      */
     app.controller('AuthenticateCtrl', [
         '$rootScope', '$state', '_log', '_func', '_ajax',
@@ -18,9 +17,6 @@
 
             /** @type {string} Error message. */
             ctrl.sErrorMessage = '';
-
-            /** @temp */
-            ctrl.sApiCall = 'http://host-back/app_dev.php/';
 
             /**
              * Send login data.
@@ -39,7 +35,7 @@
             ctrl.firstCall = function (sUsername, sPassword) {
                 _log('Authentication firstCall()');
 
-                _ajax.post(ctrl.sApiCall + 'login/', {
+                _ajax.post(sBackendUrl + 'login/', {
                         username: sUsername,
                         password: sPassword
                     },
@@ -58,7 +54,7 @@
             ctrl.secondCall = function (oFirstResponse) {
                 _log('Authentication secondCall({oFirstResponse})', oFirstResponse);
 
-                _ajax.get(ctrl.sApiCall + 'api/oauth2/authorize/', oFirstResponse,
+                _ajax.get(sBackendUrl + 'api/oauth2/authorize/', oFirstResponse,
                     function (oSecondResponse) {
                         ctrl.thirdCall(oFirstResponse, oSecondResponse);
                     }, function (oErrorResponse) {
@@ -74,9 +70,7 @@
             ctrl.thirdCall = function (oFirstResponse, oSecondResponse) {
                 _log('Authentication thirdCall({oFirstResponse}, {oSecondResponse})', [oFirstResponse, oSecondResponse]);
 
-                console.debug(oFirstResponse.data);
-
-                _ajax.post(ctrl.sApiCall + oFirstResponse.data.redirect_uri, {
+                _ajax.post(sBackendUrl + oFirstResponse.data.redirect_uri, {
                         "grant_type": "authorization_code",
                         "client_id": oFirstResponse.data.client_id,
                         "client_secret": oFirstResponse.data.client_secret,

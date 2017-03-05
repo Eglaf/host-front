@@ -1,0 +1,104 @@
+<ng-include src="'view/pre.html'"></ng-include>
+
+<h1>FlagForm</h1>
+
+<form class="content-box">
+
+    <div class="form-group">
+
+        <label>Partner</label>
+        <input type="text" disabled="disabled" class="form-control" ng-value="ctrl.oUserData.partner"/>
+
+        <label>Full name</label>
+        <input type="text" disabled="disabled" class="form-control" ng-value="ctrl.oUserData.fullName"/>
+
+        <label>Contact</label>
+        <input type="text" disabled="disabled" class="form-control" ng-value="ctrl.oUserData.contact"/>
+
+        <label>Phone number</label>
+        <input type="text" disabled="disabled" class="form-control" ng-value="ctrl.oUserData.phoneNumber"/>
+
+        <table class="flagTable">
+            <tbody>
+            <tr>
+                <td>
+                    <label>Flag Phone</label>
+                </td>
+                <td>
+                    <button class="btn btn-success"
+                            ng-show="ctrl.oUserData.flagPhone"
+                            ng-click="ctrl.oUserData.flagPhone = false;">Enabled
+                    </button>
+                    <button class="btn btn-danger"
+                            ng-hide="ctrl.oUserData.flagPhone"
+                            ng-click="ctrl.oUserData.flagPhone = true;">Disabled
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Flag Email</label>
+                </td>
+                <td>
+                    <button class="btn btn-success"
+                            ng-show="ctrl.oUserData.flagEmail"
+                            ng-click="ctrl.oUserData.flagEmail = false;">Enabled
+                    </button>
+                    <button class="btn btn-danger"
+                            ng-hide="ctrl.oUserData.flagEmail"
+                            ng-click="ctrl.oUserData.flagEmail = true;">Disabled
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Flag Report</label>
+                </td>
+                <td>
+                    <button class="btn btn-success"
+                            ng-show="ctrl.oUserData.flagReport"
+                            ng-click="ctrl.oUserData.flagReport = false;">Enabled
+                    </button>
+                    <button class="btn btn-danger"
+                            ng-hide="ctrl.oUserData.flagReport"
+                            ng-click="ctrl.oUserData.flagReport = true;">Disabled
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button class="btn btn-primary"
+            ng-click="ctrl.submit()">
+        Save
+    </button>
+
+    <a ui-sref="users-list" class="btn btn-default">
+        Back
+    </a>
+
+    <br/>
+    <br/>
+
+    <div ng-show="ctrl.bError" class="alert alert-danger">
+        Something is invalid...
+    </div>
+
+</form>
+
+
+<ng-include src="'view/post.html'"></ng-include>
+
+<style type="text/css">
+
+    .flagTable > tbody > tr > td {
+        padding: 10px;
+    }
+
+    .flagTable > tbody > tr > td > button {
+        width: 80px;
+    }
+
+
+</style>

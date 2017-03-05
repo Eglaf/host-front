@@ -12,12 +12,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/dashboard',
             templateUrl: 'view/dashboard.html',
             controller: 'DashboardCtrl',
-            controllerAs: 'ctrl',
-            resolve: {
-                oResponseData: [function () {
-                    return null;
-                }]
-            }
+            controllerAs: 'ctrl'
         })
         // Users list.
         .state('users-list', {
@@ -27,7 +22,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controllerAs: 'ctrl',
             resolve: {
                 aoUsersData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
-                    return _ajax.get('http://host-back/app_dev.php/users/');
+                    return _ajax.get(sBackendUrl + 'users/');
                 }]
             }
         })
@@ -36,31 +31,36 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/user/{userId}/password-change',
             templateUrl: 'view/users/passwordForm.html',
             controller: 'UserPasswordFormCtrl',
-            controllerAs: 'ctrl',
-            resolve: {
-                /*oPartnerData: [function () {
-                    return null;
-                }]*/
-            }
+            controllerAs: 'ctrl'
         })
         // User reports.
-        .state('user-reports-list', {
-            url: '/user/report/list',
-            templateUrl: 'view/users/reportList.html',
-            controller: 'UsersReportListCtrl',
+        .state('userReports-list', {
+            url: '/user-reports/list',
+            templateUrl: 'view/userReports/list.html',
+            controller: 'UserReportsListCtrl',
             controllerAs: 'ctrl',
             resolve: {
                 aoUsersData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
-                    return _ajax.get('http://host-back/app_dev.php/users/settings/');
+                    return _ajax.get(sBackendUrl + 'users/settings/');
+                }]
+            }
+        })
+        .state('usersReports-flagForm', {
+            url: '/user-reports/{userId}/flag-form',
+            templateUrl: 'view/userReports/flagForm.html',
+            controller: 'UserReportsFlagFormCtrl',
+            controllerAs: 'ctrl',
+            resolve: {
+                oUserData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
+                    return _ajax.get(sBackendUrl + 'users/' + $stateParams.userId + '/settings/');
                 }]
             }
         })
 
-
         //
         // Test stuff...
         //
-
+/*
         // Partners
         .state('partner-list', {
             url: '/partner/list',
@@ -337,7 +337,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             //         return _ajax.get('http://tp/back/index.php?ctrl=subscriber&action=load&id=' + $stateParams.id);
             //     }]
             // }
-        });
+        })*/;
 
     $urlRouterProvider.otherwise('/authenticate');
 

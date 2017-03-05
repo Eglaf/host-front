@@ -62,10 +62,9 @@
                         text: '',
                         func: function (oRow) {
                             var sButtons = '';
-                            // sButtons += '<a ui-sref="customer-list({partnerId:' + obj.id + '})" class="btn btn-default btn-xs">Customers</a> ';
                             sButtons += '<a href="#" class="btn btn-default btn-xs">Activate</a> ';
-                            sButtons += '<a ui-sref="users-password-form({userId:' + oRow.userId + '})" href="" class="btn btn-default btn-xs">Update password</a> ';
-                            sButtons += '<a href="#" class="btn btn-default btn-xs">User reports</a> ';
+                            sButtons += '<a ui-sref="users-password-form({userId:' + oRow.userId + '})" class="btn btn-default btn-xs">Update password</a> ';
+                            sButtons += '<a ui-sref="usersReports-flagForm({userId:' + oRow.userId + '})" class="btn btn-default btn-xs">User reports</a> ';
 
                             return sButtons;
                         }
