@@ -56,6 +56,23 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
+        .state('partnerGroups-list', {
+            url: '/partner-groups/list',
+            templateUrl: 'view/partnerGroups/list.html',
+            controller: 'PartnerGroupsListCtrl',
+            controllerAs: 'ctrl',
+            resolve: {
+                aoPartnerGroupsData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
+                    return _ajax.get(sBackendUrl + 'partners/groups/');
+                }]
+            }
+        })
+        .state('partnerGroups-create', {
+            url: '/partner-groups/create',
+            templateUrl: 'view/partnerGroups/form.html',
+            controller: 'PartnerGroupFormCtrl',
+            controllerAs: 'ctrl'
+        })
 
         //
         // Test stuff...

@@ -6,17 +6,17 @@
      * Customer form controller.
      */
     app.controller('UserPasswordFormCtrl', [
-        '$scope', '$state', '$stateParams', '$timeout', '_log', '_func', '_ajax',
-        function ($scope, $state, $stateParams, $timeout, _log, _func, _ajax) {
+        '$scope', '$state', '$stateParams', '$timeout', '$sce', '_log', '_func', '_ajax', '_error',
+        function ($scope, $state, $stateParams, $timeout, $sce, _log, _func, _ajax, _error) {
 
             /** @type {object} This controller. */
             var ctrl = this;
 
+            /** @type {object} Error service. */
+            ctrl.error = _error;
+
             /** @type {string} */
             ctrl.sPassword = '';
-
-            /** @type {boolean} */
-            ctrl.bError = false;
 
             /** @type {string} Name of current route state. */
             ctrl.sCurrentRoute = $state.current.name;
@@ -27,26 +27,26 @@
             ctrl.submit = function () {
                 _log('CustomerFormCtrl submit');
 
-                if (ctrl.sPassword) {
-                    ctrl.bError = false;
+                if (ctrl.sPassword.length > 8) {
+                    ctrl.error.reset();
 
                     _ajax.post('http://host-back/app_dev.php/users/' + $stateParams.userId + '/password/', {
                         'password': ctrl.sPassword
-                    }, function (data) {
-                        _log(data);
+                    }, function (response) {
+                        _log(response);
 
                         $state.go('users-list');
-                    }, function (data) {
-                        _log('error', data);
+                    }, function (response) {
+                        _log('error', response);
 
-                        ctrl.bError = true;
+                        ctrl.error.processResponse(response);
                     }, {
                         // todo headers...
                     });
                 } else {
-                    ctrl.bError = true;
+                    ctrl.error.msg = 'Password has to be more than 8 characters long!';
                 }
-            }
+            };
 
         }]);
 })();

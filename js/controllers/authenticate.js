@@ -6,23 +6,29 @@
      * AuthenticateController
      */
     app.controller('AuthenticateCtrl', [
-        '$rootScope', '$state', '_log', '_func', '_ajax',
-        function ($rootScope, $state, _log, _func, _ajax) {
+        '$rootScope', '$state', '$stateParams', '_log', '_func', '_ajax', '_error',
+        function ($rootScope, $state, $stateParams, _log, _func, _ajax, _error) {
 
             /** @type {object} This controller. */
             var ctrl = this;
+
+            /** @type {object} Error service */
+            ctrl.error = _error;
 
             /** @type {{username: string, password: string}} Form input values. */
             ctrl.oForm = {username: '', password: ''};
 
             /** @type {string} Error message. */
-            ctrl.sErrorMessage = '';
+            // ctrl.sErrorMessage = '';
 
             /**
              * Send login data.
              */
             ctrl.submitLogin = function () {
-                ctrl.sErrorMessage = '';
+                _log(ctrl.error.authFrom, ctrl.error.fromParams);
+
+                // ctrl.sErrorMessage = '';
+                ctrl.error.reset();
 
                 ctrl.firstCall(ctrl.oForm.username, ctrl.oForm.password);
             };
@@ -34,6 +40,7 @@
              */
             ctrl.firstCall = function (sUsername, sPassword) {
                 _log('Authentication firstCall()');
+                _log(ctrl.error.authFrom, ctrl.error.fromParams);
 
                 _ajax.post(sBackendUrl + 'login/', {
                         username: sUsername,
@@ -53,6 +60,7 @@
              */
             ctrl.secondCall = function (oFirstResponse) {
                 _log('Authentication secondCall({oFirstResponse})', oFirstResponse);
+                _log(ctrl.error.authFrom, ctrl.error.fromParams);
 
                 _ajax.get(sBackendUrl + 'api/oauth2/authorize/', oFirstResponse,
                     function (oSecondResponse) {
@@ -69,6 +77,7 @@
              */
             ctrl.thirdCall = function (oFirstResponse, oSecondResponse) {
                 _log('Authentication thirdCall({oFirstResponse}, {oSecondResponse})', [oFirstResponse, oSecondResponse]);
+                _log(ctrl.error.authFrom, ctrl.error.fromParams);
 
                 _ajax.post(sBackendUrl + oFirstResponse.data.redirect_uri, {
                         "grant_type": "authorization_code",
@@ -83,9 +92,14 @@
 
                         _log('third call succeeded... be happy and do something about it... A:' + sAccessToken + ' R:' + sRefreshToken);
 
-                        $state.go('dashboard');
+                        if (ctrl.error.authFrom.length) {
+                            ctrl.error.goBack();
+                        } else {
+                            $state.go('dashboard');
+                        }
                     }, function (oErrorResponse) {
-                        ctrl.errorResponse(oErrorResponse);
+                        ctrl.error.processResponse(oErrorResponse);
+                        // ctrl.errorResponse(oErrorResponse);
                     });
             };
 
@@ -93,20 +107,20 @@
              * Show error.
              * @param {object} oErrorResponse
              */
-            ctrl.errorResponse = function (oErrorResponse) {
+/*            ctrl.errorResponse = function (oErrorResponse) {
                 _log('Authentication errorResponse({oErrorResponse})', oErrorResponse);
                 _log('error', 'ErrorCode: ' + oErrorResponse.code + ' \n Invalid: ' + oErrorResponse.invalid + ' \n Message: ' + oErrorResponse.message);
 
                 ctrl.sErrorMessage = oErrorResponse.message;
-            };
+            };*/
 
             /**
              * Decide if there is an error or not.
              * @return {Number}
              */
-            ctrl.isError = function () {
+            /*ctrl.isError = function () {
                 return ctrl.sErrorMessage.length;
-            }
+            }*/
 
         }]);
 })();

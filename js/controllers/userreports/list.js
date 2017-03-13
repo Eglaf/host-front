@@ -85,7 +85,7 @@
 
             /**
              * Change flags.
-             * @param iUserId {integer} User id.
+             * @param iUserId {number} User id.
              * @param sThat {string} Property.
              */
             ctrl.flagChange = function (iUserId, sThat) {

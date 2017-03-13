@@ -166,6 +166,88 @@
      *************************************************************************************************************************************************************/
 
     /**
+     * Service to handle errors.
+     */
+    app.factory("_error", ["$state", "$stateParams", "$sce", "_func", "_log", function ($state, $stateParams, $sce, _func, _log) {
+        return {
+
+            /** @var {string} The error msg. */
+            msg: '',
+
+            /**
+             * Check if there is an error.
+             * @return {Number} Number of characters. Zero if there is'nt an error.
+             */
+            has: function () {
+                return (this.msg.length);
+            },
+
+            /**
+             * Reset error msg.
+             */
+            reset: function () {
+                this.msg = '';
+            },
+
+            /**
+             * Sce trustAsHtml.
+             * @return {string}
+             */
+            html: function () {
+                return $sce.trustAsHtml(this.msg);
+            },
+
+            /**
+             * Process response of ajax.
+             * @param response
+             */
+            processResponse: function (response) {
+                _log('error processResponse');
+
+                if (response.status === 401) {
+                    _log('debug', $stateParams);
+                    this.setAuthFrom($state.current.name, _func.clone($stateParams));
+
+                    $state.go('authenticate');
+                } else {
+                    if (typeof response.data.errorMsg === 'string') {
+                        this.msg = response.data.errorMsg;
+                    } else {
+                        this.msg = 'ERROR';
+                    }
+                }
+            },
+
+            /** @var {string} In case of authentication needed... was redirect from here. */
+            authFrom: '',
+
+            /** @var {object} In case of authentication needed... had these params. */
+            fromParams: {},
+
+            /**
+             * Set the page to redirect to after authentication.
+             * @param authFrom
+             * @param fromParams
+             */
+            setAuthFrom: function (authFrom, fromParams) {
+                this.authFrom = authFrom;
+                this.fromParams = fromParams;
+            },
+
+            /**
+             * Go back to the page, it was redirect from. Then reset variables.
+             */
+            goBack: function () {
+                $state.go(this.authFrom, this.fromParams);
+
+                this.authFrom = '';
+                this.fromParams = {};
+            }
+
+        }
+    }]);
+
+    /**
      * Some commonly used function.
      */
     app.factory("_func", ["_log", function (_log) {
