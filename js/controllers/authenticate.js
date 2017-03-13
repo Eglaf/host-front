@@ -50,7 +50,7 @@
                         ctrl.secondCall(oFirstResponse);
                     },
                     function (oErrorResponse) {
-                        ctrl.errorResponse(oErrorResponse);
+                        ctrl.error.processResponse(oErrorResponse);
                     });
             };
 
@@ -66,7 +66,7 @@
                     function (oSecondResponse) {
                         ctrl.thirdCall(oFirstResponse, oSecondResponse);
                     }, function (oErrorResponse) {
-                        ctrl.errorResponse(oErrorResponse);
+                        ctrl.error.processResponse(oErrorResponse);
                     });
             };
 
@@ -99,7 +99,6 @@
                         }
                     }, function (oErrorResponse) {
                         ctrl.error.processResponse(oErrorResponse);
-                        // ctrl.errorResponse(oErrorResponse);
                     });
             };
 
