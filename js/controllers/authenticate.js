@@ -36,10 +36,12 @@
                 _log('Authentication firstCall(' + sUsername + ', ' + sPassword + ')');
 
                 if (sUsername && sPassword) {
-                    _ajax.post(sBackendUrl + 'login/', {
+                    _ajax.post(sBackendUrl + 'login/', /*{
                             username: sUsername,
                             password: sPassword
-                        },
+                        }*/
+                        '{"username": "' + sUsername + '", "password": "' + sPassword + '"}'
+                        ,
                         function (oFirstResponse) {
                             ctrl.secondCall(oFirstResponse);
                         },
