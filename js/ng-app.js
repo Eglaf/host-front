@@ -171,49 +171,72 @@
     app.factory("_error", ["$state", "$stateParams", "$sce", "_func", "_log", function ($state, $stateParams, $sce, _func, _log) {
         return {
 
-            /** @var {string} The error msg. */
-            msg: '',
+            /** @var {Array} The error messages. */
+            aoErrors: [],
+
+            /** @var {number} The status code. */
+            iStatusCode: 0,
+
+            /** @var {boolean} Show more error. */
+            bOpen: false,
+
+            /**
+             * Add an error message
+             * @param sMsg
+             * @param iCode
+             */
+            add: function (sMsg, iCode) {
+                iCode = _func.default(iCode, 0);
+
+                this.aoErrors.push({
+                    code: (iCode > 0 ? iCode : 0),
+                    message: sMsg
+                })
+
+                return this;
+            },
 
             /**
              * Check if there is an error.
              * @return {Number} Number of characters. Zero if there is'nt an error.
              */
             has: function () {
-                return (this.msg.length);
+                return (this.aoErrors.length);
             },
 
             /**
-             * Reset error msg.
+             * Reset errors.
              */
             reset: function () {
-                this.msg = '';
-            },
+                this.aoErrors = [];
 
-            /**
-             * Sce trustAsHtml.
-             * @return {string}
-             */
-            html: function () {
-                return $sce.trustAsHtml(this.msg);
+                return this;
             },
 
             /**
              * Process response of ajax.
-             * @param response
+             * @param oResponse
              */
-            processResponse: function (response) {
+            processResponse: function (oResponse) {
                 _log('error processResponse');
 
-                if (response.status === 401) {
-                    _log('debug', $stateParams);
+                if (oResponse.status === 401) {
                     this.setAuthFrom($state.current.name, _func.clone($stateParams));
 
                     $state.go('authenticate');
                 } else {
-                    if (typeof response.data.errorMsg === 'string') {
-                        this.msg = response.data.errorMsg;
+                    this.iStatusCode = oResponse.status;
+
+                    _log('debug', oResponse.data);
+                    _log('debug', oResponse.data.errors);
+
+                    if (Array.isArray(oResponse.data.errors)) {
+                        this.aoErrors = oResponse.data.errors;
                     } else {
-                        this.msg = 'ERROR';
+                        this.aoErrors = [{
+                            code: -1,
+                            message: 'Error!'
+                        }];
                     }
                 }
             },

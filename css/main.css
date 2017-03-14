@@ -44,6 +44,17 @@ table > thead > tr > th {
     cursor: pointer;
 }
 
+
+/* Errors */
+
+div.errors > div > div > img {
+    height:32px;
+}
+
+div.errors > div > div > div > ul {
+    list-style: none;
+}
+
 /*
  * http://hosting.healthy-websites.com/admin/code/images/arrow-left-100.png
  * http://hosting.healthy-websites.com/admin/code/images/arrow-right-100.png

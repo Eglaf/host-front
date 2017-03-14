@@ -32,19 +32,21 @@
 
                     _ajax.post('http://host-back/app_dev.php/users/' + $stateParams.userId + '/password/', {
                         'password': ctrl.sPassword
-                    }, function (response) {
-                        _log(response);
+                    }, function (oResponse) {
+                        _log(oResponse);
 
                         $state.go('users-list');
-                    }, function (response) {
-                        _log('error', response);
+                    }, function (oResponse) {
+                        _log('error', oResponse);
 
-                        ctrl.error.processResponse(response);
+                        ctrl.error.processResponse(oResponse);
                     }, {
                         // todo headers...
                     });
                 } else {
-                    ctrl.error.msg = 'Password has to be more than 8 characters long!';
+                    ctrl.error
+                        .reset()
+                        .add('Password has to be more than 8 characters long!');
                 }
             };
 

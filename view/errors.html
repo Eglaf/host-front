@@ -1,0 +1,40 @@
+<div class="container alert alert-danger errors" ng-show="ctrl.error.has()">
+    <div class="row">
+        <div class="col-lg-1">
+            <img ng-show="ctrl.error.iStatusCode >= 400 && ctrl.error.iStatusCode <= 405"
+                 src="img/icon/400-405.png"/>
+            <img ng-show="ctrl.error.iStatusCode >= 500 && ctrl.error.iStatusCode <= 502"
+                 src="img/icon/500-502.png"/>
+            <img ng-show="ctrl.error.iStatusCode == 503"
+                 src="img/icon/503.jpg"/>
+        </div>
+        <div class="col-lg-11">
+            <div>
+                <span ng-show="ctrl.error.aoErrors[0].code > 0">
+                    |[ ctrl.error.aoErrors[0].code ]|
+                </span>
+                <span>
+                    |[ ctrl.error.aoErrors[0].message ]|
+                </span>
+            </div>
+
+            <div ng-show="ctrl.error.aoErrors.length > 1">
+                <span ng-show="!ctrl.error.bOpen"
+                      ng-click="ctrl.error.bOpen = true;">
+                    Open
+                </span>
+                <span ng-show="ctrl.error.bOpen"
+                      ng-click="ctrl.error.bOpen = false;">
+                    Close
+                </span>
+
+                <ul ng-show="ctrl.error.bOpen">
+                    <li ng-repeat="oError in ctrl.error.aoErrors track by $index" ng-if="$index > 0">
+                        |[ oError.code ]|
+                        |[ oError.message ]|
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div><!-- .row -->
+</div><!-- .container -->

@@ -18,16 +18,10 @@
             /** @type {{username: string, password: string}} Form input values. */
             ctrl.oForm = {username: '', password: ''};
 
-            /** @type {string} Error message. */
-            // ctrl.sErrorMessage = '';
-
             /**
              * Send login data.
              */
             ctrl.submitLogin = function () {
-                _log(ctrl.error.authFrom, ctrl.error.fromParams);
-
-                // ctrl.sErrorMessage = '';
                 ctrl.error.reset();
 
                 ctrl.firstCall(ctrl.oForm.username, ctrl.oForm.password);
@@ -40,7 +34,6 @@
              */
             ctrl.firstCall = function (sUsername, sPassword) {
                 _log('Authentication firstCall()');
-                _log(ctrl.error.authFrom, ctrl.error.fromParams);
 
                 _ajax.post(sBackendUrl + 'login/', {
                         username: sUsername,
@@ -60,9 +53,8 @@
              */
             ctrl.secondCall = function (oFirstResponse) {
                 _log('Authentication secondCall({oFirstResponse})', oFirstResponse);
-                _log(ctrl.error.authFrom, ctrl.error.fromParams);
 
-                _ajax.get(sBackendUrl + 'api/oauth2/authorize/', oFirstResponse,
+                _ajax.get(sBackendUrl + 'api/oauth2/authorize/', oFirstResponse.data,
                     function (oSecondResponse) {
                         ctrl.thirdCall(oFirstResponse, oSecondResponse);
                     }, function (oErrorResponse) {
@@ -77,7 +69,6 @@
              */
             ctrl.thirdCall = function (oFirstResponse, oSecondResponse) {
                 _log('Authentication thirdCall({oFirstResponse}, {oSecondResponse})', [oFirstResponse, oSecondResponse]);
-                _log(ctrl.error.authFrom, ctrl.error.fromParams);
 
                 _ajax.post(sBackendUrl + oFirstResponse.data.redirect_uri, {
                         "grant_type": "authorization_code",
@@ -92,34 +83,17 @@
 
                         _log('third call succeeded... be happy and do something about it... A:' + sAccessToken + ' R:' + sRefreshToken);
 
+                        ctrl.error.reset();
                         if (ctrl.error.authFrom.length) {
                             ctrl.error.goBack();
                         } else {
+                            // TODO
                             $state.go('dashboard');
                         }
                     }, function (oErrorResponse) {
                         ctrl.error.processResponse(oErrorResponse);
                     });
             };
-
-            /**
-             * Show error.
-             * @param {object} oErrorResponse
-             */
-/*            ctrl.errorResponse = function (oErrorResponse) {
-                _log('Authentication errorResponse({oErrorResponse})', oErrorResponse);
-                _log('error', 'ErrorCode: ' + oErrorResponse.code + ' \n Invalid: ' + oErrorResponse.invalid + ' \n Message: ' + oErrorResponse.message);
-
-                ctrl.sErrorMessage = oErrorResponse.message;
-            };*/
-
-            /**
-             * Decide if there is an error or not.
-             * @return {Number}
-             */
-            /*ctrl.isError = function () {
-                return ctrl.sErrorMessage.length;
-            }*/
 
         }]);
 })();

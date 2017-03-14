@@ -1,11 +1,8 @@
 <div class="login-box">
 
-    <form>
+    <ng-include src="'view/errors.html'"></ng-include>
 
-        <div class="alert alert-danger"
-             ng-show="ctrl.error.has()"
-             ng-bind-html="ctrl.error.html()">
-        </div>
+    <form>
 
         <div class="form-group">
             <label for="username">Username</label>
