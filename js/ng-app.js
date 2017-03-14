@@ -678,6 +678,7 @@
              * @param oHeaders {object} Headers if needed. // todo? third param? if func not object, then success instead... or just use _ajax.request... https://docs.angularjs.org/api/ng/service/$http
              */
             post: function (sUrl, oData, funcSuccess, funcError, oHeaders) {
+                _log('AJAX POST data...', oData);
                 var oRequest = {
                     method: "POST",
                     url: sUrl,

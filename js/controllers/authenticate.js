@@ -33,18 +33,22 @@
              * @param sPassword {string} Password.
              */
             ctrl.firstCall = function (sUsername, sPassword) {
-                _log('Authentication firstCall()');
+                _log('Authentication firstCall(' + sUsername + ', ' + sPassword + ')');
 
-                _ajax.post(sBackendUrl + 'login/', {
-                        username: sUsername,
-                        password: sPassword
-                    },
-                    function (oFirstResponse) {
-                        ctrl.secondCall(oFirstResponse);
-                    },
-                    function (oErrorResponse) {
-                        ctrl.error.processResponse(oErrorResponse);
-                    });
+                if (sUsername && sPassword) {
+                    _ajax.post(sBackendUrl + 'login/', {
+                            username: sUsername,
+                            password: sPassword
+                        },
+                        function (oFirstResponse) {
+                            ctrl.secondCall(oFirstResponse);
+                        },
+                        function (oErrorResponse) {
+                            ctrl.error.processResponse(oErrorResponse);
+                        });
+                } else {
+                    ctrl.error.add('Empty username or password!');
+                }
             };
 
             /**
