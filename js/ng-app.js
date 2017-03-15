@@ -689,7 +689,7 @@
             post: function (sUrl, oData, funcSuccess, funcError, oHeaders) {
                 if ($rootScope.sAccessToken /*&& $rootScope.sRefreshToken*/) {
                     var oHeadersPost = Object.assign({
-                        HTTP_AUTHORIZATION: $rootScope.sAccessToken/*,
+                        Authorization: $rootScope.sAccessToken/*,
                         refresh_token: $rootScope.sRefreshToken,*/
                     }, oHeaders);
                 }
