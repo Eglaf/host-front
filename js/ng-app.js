@@ -81,6 +81,7 @@
     });
 
 
+
     /**************************************************************************************************************************************************************
      *                                                          **         **         **         **         **         **         **         **         **         **
      * Directives                                                 **         **         **         **         **         **         **         **         **         **
@@ -226,9 +227,6 @@
                     $state.go('authenticate');
                 } else {
                     this.iStatusCode = oResponse.status;
-
-                    _log('debug', oResponse.data);
-                    _log('debug', oResponse.data.errors);
 
                     if (Array.isArray(oResponse.data.errors)) {
                         this.aoErrors = oResponse.data.errors;
@@ -664,7 +662,7 @@
             get: function (sUrl, oParams, funcSuccess, funcError, oHeaders) {
                 if ($rootScope.sAccessToken /*&& $rootScope.sRefreshToken*/) {
                     var oHeadersGet = Object.assign({
-                        Authorization: $rootScope.sAccessToken/*,
+                        'Authorization': $rootScope.sAccessToken/*,
                         refresh_token: $rootScope.sRefreshToken,*/
                     }, oHeaders);
                 }
@@ -689,7 +687,7 @@
             post: function (sUrl, oData, funcSuccess, funcError, oHeaders) {
                 if ($rootScope.sAccessToken /*&& $rootScope.sRefreshToken*/) {
                     var oHeadersPost = Object.assign({
-                        Authorization: $rootScope.sAccessToken/*,
+                        'Authorization': $rootScope.sAccessToken/*,
                         refresh_token: $rootScope.sRefreshToken,*/
                     }, oHeaders);
                 }

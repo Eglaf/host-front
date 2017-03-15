@@ -34,8 +34,8 @@
                         globalSearchPlaceholder: 'Search'
                     })
                     .setColumns([{
-                        text: 'Full name',
-                        prop: 'fullName',
+                        text: 'Name',
+                        prop: 'name',
                         search: 'string',
                         order: true
                     }, {
@@ -50,7 +50,7 @@
                         order: true
                     }, {
                         text: 'Phone number',
-                        prop: 'phoneNumber',
+                        prop: 'phone',
                         search: 'string',
                         order: true
                     }, {

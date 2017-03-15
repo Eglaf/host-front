@@ -82,7 +82,7 @@
                         "code": oSecondResponse.data.code
                     },
                     function (oThirdResponse) {
-                        $rootScope.sAccessToken = oThirdResponse.data.accessToken;
+                        $rootScope.sAccessToken = oThirdResponse.data.access_token;
                         $rootScope.sRefreshToken = oThirdResponse.data.refresh_token;
 
                         _log('third call succeeded... be happy and do something about it... A:' + $rootScope.sAccessToken + ' R:' + $rootScope.sRefreshToken);
