@@ -662,10 +662,10 @@
              * @param oHeaders {object} Headers if needed.
              */
             get: function (sUrl, oParams, funcSuccess, funcError, oHeaders) {
-                if ($rootScope.sAccessToken && $rootScope.sRefreshToken) {
+                if ($rootScope.sAccessToken /*&& $rootScope.sRefreshToken*/) {
                     var oHeadersGet = Object.assign({
-                        auth_token: $rootScope.sAccessToken,
-                        refresh_token: $rootScope.sRefreshToken,
+                        Authorization: $rootScope.sAccessToken/*,
+                        refresh_token: $rootScope.sRefreshToken,*/
                     }, oHeaders);
                 }
 
@@ -687,10 +687,10 @@
              * @param oHeaders {object} Headers if needed.
              */
             post: function (sUrl, oData, funcSuccess, funcError, oHeaders) {
-                if ($rootScope.sAccessToken && $rootScope.sRefreshToken) {
+                if ($rootScope.sAccessToken /*&& $rootScope.sRefreshToken*/) {
                     var oHeadersPost = Object.assign({
-                        auth_token: $rootScope.sAccessToken,
-                        refresh_token: $rootScope.sRefreshToken,
+                        HTTP_AUTHORIZATION: $rootScope.sAccessToken/*,
+                        refresh_token: $rootScope.sRefreshToken,*/
                     }, oHeaders);
                 }
 
