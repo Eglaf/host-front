@@ -28,9 +28,9 @@
                 _log('CustomerFormCtrl submit');
 
                 _ajax.post(sBackendUrl + 'users/' + $stateParams.userId + '/settings/', {
-                    flagPhone: ctrl.oUserData.flagPhone,
-                    flagEmail: ctrl.oUserData.flagEmail,
-                    flagReport: ctrl.oUserData.flagReport
+                    flagPhone: ctrl.oUserData.flag_phone,
+                    flagEmail: ctrl.oUserData.flag_email,
+                    flagReport: ctrl.oUserData.flag_report
                 }, function (data) {
                     _log(data);
 

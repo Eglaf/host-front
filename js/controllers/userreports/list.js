@@ -76,9 +76,9 @@
             ctrl.getUserButtons = function (oUser) {
                 var sResult = '';
 
-                sResult += '<span class="btn ' + (oUser.flagPhone ? 'btn-success' : 'btn-danger') + ' btn-xs" ng-click="ctrl.flagChange(' + oUser.userId + ', \'flagPhone\');">Flag Phone</span> ';
-                sResult += '<span class="btn ' + (oUser.flagEmail ? 'btn-success' : 'btn-danger') + ' btn-xs" ng-click="ctrl.flagChange(' + oUser.userId + ', \'flagEmail\');">Flag Email</span> ';
-                sResult += '<span class="btn ' + (oUser.flagReport ? 'btn-success' : 'btn-danger') + ' btn-xs" ng-click="ctrl.flagChange(' + oUser.userId + ', \'flagReport\');">Flag Report</span> ';
+                sResult += '<span class="btn ' + (oUser.flag_phone ? 'btn-success' : 'btn-danger') + ' btn-xs" ng-click="ctrl.flagChange(' + oUser.userId + ', \'flag_phone\');">Flag Phone</span> ';
+                sResult += '<span class="btn ' + (oUser.flag_email ? 'btn-success' : 'btn-danger') + ' btn-xs" ng-click="ctrl.flagChange(' + oUser.userId + ', \'flag_email\');">Flag Email</span> ';
+                sResult += '<span class="btn ' + (oUser.flag_report ? 'btn-success' : 'btn-danger') + ' btn-xs" ng-click="ctrl.flagChange(' + oUser.userId + ', \'flag_report\');">Flag Report</span> ';
 
                 return sResult;
             };
@@ -94,9 +94,9 @@
                 var oUser = _func.findInArrayOfObjectsBy(ctrl.aoUsers, 'userId', iUserId);
                 oUser[sThat] = !oUser[sThat];
                 var oFrackingAutoParseToString = {
-                    flagPhone: (oUser.flagPhone ? 1 : 0),
-                    flagEmail: (oUser.flagEmail ? 1 : 0),
-                    flagReport: (oUser.flagReport ? 1 : 0)
+                    flag_phone: (oUser.flag_phone ? 1 : 0),
+                    flag_email: (oUser.flag_email ? 1 : 0),
+                    flag_report: (oUser.flag_report ? 1 : 0)
                 };
 
                 _log('debug', 'Sent data', oFrackingAutoParseToString);
@@ -105,9 +105,9 @@
 
                     _log('debug', 'Received data', oSomeStringSheet.data);
 
-                    oUser.flagPhone = (oSomeStringSheet.data.flagPhone == "1" ? 1 : 0);
-                    oUser.flagEmail = (oSomeStringSheet.data.flagEmail == "1" ? 1 : 0);
-                    oUser.flagReport = (oSomeStringSheet.data.flagReport == "1" ? 1 : 0);
+                    oUser.flag_phone = (oSomeStringSheet.data.flag_phone == "1" ? 1 : 0);
+                    oUser.flag_email = (oSomeStringSheet.data.flag_email == "1" ? 1 : 0);
+                    oUser.flag_report = (oSomeStringSheet.data.flag_report == "1" ? 1 : 0);
 
                     var sButtons = ctrl.getUserButtons(oUser);
                     var sCompiledButtons = $compile(sButtons)($scope);
