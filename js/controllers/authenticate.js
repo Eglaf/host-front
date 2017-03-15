@@ -79,7 +79,7 @@
                         "client_id": oFirstResponse.data.client_id,
                         "client_secret": oFirstResponse.data.client_secret,
                         "redirect_uri": "token",
-                        "code": oSecondResponse.code
+                        "code": oSecondResponse.data.code
                     },
                     function (oThirdResponse) {
                         var sAccessToken = oThirdResponse.data.accessToken;
