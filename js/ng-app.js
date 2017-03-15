@@ -637,7 +637,7 @@
     /**
      * Some function to work with Ajax requests.
      */
-    app.factory("_ajax", ["$http", "_log", function ($http, _log) {
+    app.factory("_ajax", ["$rootScope", "$http", "_log", function ($rootScope, $http, _log) {
         return {
 
             /**
@@ -659,12 +659,21 @@
              * @param oParams {Object} Parameters of request.
              * @param funcSuccess {Function} It'll run after the ajax request is done. The only parameter is the JSON array as result from server.
              * @param funcError {Function} It'll run after the ajax request is done, but the status isn't 200. The only parameter is the JSON array as result form the server.
+             * @param oHeaders {object} Headers if needed.
              */
-            get: function (sUrl, oParams, funcSuccess, funcError) {
+            get: function (sUrl, oParams, funcSuccess, funcError, oHeaders) {
+                if ($rootScope.sAccessToken && $rootScope.sRefreshToken) {
+                    var oHeadersGet = Object.assign({
+                        auth_token: $rootScope.sAccessToken,
+                        refresh_token: $rootScope.sRefreshToken,
+                    }, oHeaders);
+                }
+
                 var oRequest = {
                     method: "GET",
                     url: sUrl,
-                    params: oParams
+                    params: oParams,
+                    headers: oHeadersGet
                 };
                 return this.request(oRequest, funcSuccess, funcError);
             },
@@ -675,14 +684,21 @@
              * @param oData {object} Posted data. It works well only if it's in x-www-form-urlencoded format.
              * @param funcSuccess {function} It'll run after the ajax request is done. The only parameter is JSON array as result from server.
              * @param funcError {function} It'll run after the ajax request is done, but the status isn't 200. The only parameter is the JSON array as result form the server.
-             * @param oHeaders {object} Headers if needed. // todo? third param? if func not object, then success instead... or just use _ajax.request... https://docs.angularjs.org/api/ng/service/$http
+             * @param oHeaders {object} Headers if needed.
              */
             post: function (sUrl, oData, funcSuccess, funcError, oHeaders) {
+                if ($rootScope.sAccessToken && $rootScope.sRefreshToken) {
+                    var oHeadersPost = Object.assign({
+                        auth_token: $rootScope.sAccessToken,
+                        refresh_token: $rootScope.sRefreshToken,
+                    }, oHeaders);
+                }
+
                 var oRequest = {
                     method: "POST",
                     url: sUrl,
                     data: JSON.stringify(oData),
-                    headers: oHeaders
+                    headers: oHeadersPost
                 };
                 return this.request(oRequest, funcSuccess, funcError);
             },

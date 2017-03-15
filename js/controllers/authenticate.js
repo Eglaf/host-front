@@ -82,10 +82,10 @@
                         "code": oSecondResponse.data.code
                     },
                     function (oThirdResponse) {
-                        var sAccessToken = oThirdResponse.data.accessToken;
-                        var sRefreshToken = oThirdResponse.data.refresh_token;
+                        $rootScope.sAccessToken = oThirdResponse.data.accessToken;
+                        $rootScope.sRefreshToken = oThirdResponse.data.refresh_token;
 
-                        _log('third call succeeded... be happy and do something about it... A:' + sAccessToken + ' R:' + sRefreshToken);
+                        // _log('third call succeeded... be happy and do something about it... A:' + $rootScope.sAccessToken + ' R:' + sRefreshToken);
 
                         ctrl.error.reset();
                         if (ctrl.error.authFrom.length) {
