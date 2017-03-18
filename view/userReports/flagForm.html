@@ -6,8 +6,7 @@
 
     <div class="form-group">
 
-        <label>Partner</label>
-        <input type="text" disabled="disabled" class="form-control" ng-value="ctrl.oUserData.partner"/>
+        <ng-include src="'view/errors.html'"></ng-include>
 
         <label>Full name</label>
         <input type="text" disabled="disabled" class="form-control" ng-value="ctrl.oUserData.fullName"/>
@@ -17,6 +16,9 @@
 
         <label>Phone number</label>
         <input type="text" disabled="disabled" class="form-control" ng-value="ctrl.oUserData.phoneNumber"/>
+
+        <label>Partner</label>
+        <input type="text" disabled="disabled" class="form-control" ng-value="ctrl.oUserData.partner"/>
 
         <table class="flagTable">
             <tbody>

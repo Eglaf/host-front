@@ -31,7 +31,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/user/{userId}/password-change',
             templateUrl: 'view/users/passwordForm.html',
             controller: 'UserPasswordFormCtrl',
-            controllerAs: 'ctrl'
+            controllerAs: 'ctrl',
+            resolve: {
+                oUserData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
+                    return _ajax.get(sBackendUrl + 'users/' + $stateParams.userId + '/settings/');
+                }]
+            }
         })
         // User reports.
         .state('userReports-list', {

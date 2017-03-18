@@ -94,9 +94,9 @@
                 var oUser = _func.findInArrayOfObjectsBy(ctrl.aoUsers, 'userId', iUserId);
                 oUser[sThat] = !oUser[sThat];
                 var oFrackingAutoParseToString = {
-                    flag_phone: (oUser.flag_phone ? 1 : 0),
-                    flag_email: (oUser.flag_email ? 1 : 0),
-                    flag_report: (oUser.flag_report ? 1 : 0)
+                    flagPhone: (oUser.flag_phone ? 1 : 0),
+                    flagEmail: (oUser.flag_email ? 1 : 0),
+                    flagReport: (oUser.flag_report ? 1 : 0)
                 };
 
                 _log('debug', 'Sent data', oFrackingAutoParseToString);

@@ -81,7 +81,6 @@
     });
 
 
-
     /**************************************************************************************************************************************************************
      *                                                          **         **         **         **         **         **         **         **         **         **
      * Directives                                                 **         **         **         **         **         **         **         **         **         **
@@ -192,7 +191,7 @@
                 this.aoErrors.push({
                     code: (iCode > 0 ? iCode : 0),
                     message: sMsg
-                })
+                });
 
                 return this;
             },
@@ -219,22 +218,24 @@
              * @param oResponse
              */
             processResponse: function (oResponse) {
-                _log('error processResponse');
+                if (oResponse.status !== 200) {
+                    _log('error processResponse');
 
-                if (oResponse.status === 401) {
-                    this.setAuthFrom($state.current.name, _func.clone($stateParams));
+                    if (oResponse.status === 401) {
+                        this.setAuthFrom($state.current.name, _func.clone($stateParams));
 
-                    $state.go('authenticate');
-                } else {
-                    this.iStatusCode = oResponse.status;
-
-                    if (Array.isArray(oResponse.data.errors)) {
-                        this.aoErrors = oResponse.data.errors;
+                        $state.go('authenticate');
                     } else {
-                        this.aoErrors = [{
-                            code: -1,
-                            message: 'Error!'
-                        }];
+                        this.iStatusCode = oResponse.status;
+
+                        if (Array.isArray(oResponse.data.errors)) {
+                            this.aoErrors = oResponse.data.errors;
+                        } else {
+                            this.aoErrors = [{
+                                code: -1,
+                                message: 'Error!'
+                            }];
+                        }
                     }
                 }
             },
@@ -652,6 +653,23 @@
             },
 
             /**
+             * Get headers.
+             * @param oHeaders {object}
+             */
+            headers: function (oHeaders) {
+                var oHeadersAll = Object.assign({}, oHeaders);
+
+                if (bHeaderAuthorization && $rootScope.sAccessToken /*&& $rootScope.sRefreshToken*/) {
+                    oHeadersAll = Object.assign(oHeadersAll, {
+                        'Authorization': $rootScope.sAccessToken,
+                        // 'refresh_token': $rootScope.sRefreshToken
+                    });
+                }
+
+                return oHeadersAll;
+            },
+
+            /**
              * Simple method to send a get ajax request to the server.
              * @param sUrl {String} Target URL.
              * @param oParams {Object} Parameters of request.
@@ -660,18 +678,13 @@
              * @param oHeaders {object} Headers if needed.
              */
             get: function (sUrl, oParams, funcSuccess, funcError, oHeaders) {
-                if ($rootScope.sAccessToken /*&& $rootScope.sRefreshToken*/) {
-                    var oHeadersGet = Object.assign({
-                        'Authorization': $rootScope.sAccessToken/*,
-                        refresh_token: $rootScope.sRefreshToken,*/
-                    }, oHeaders);
-                }
-
+                _log('debug', 'headers');
+                _log('debug', this.headers(oHeaders));
                 var oRequest = {
                     method: "GET",
                     url: sUrl,
                     params: oParams,
-                    headers: oHeadersGet
+                    headers: this.headers(oHeaders)
                 };
                 return this.request(oRequest, funcSuccess, funcError);
             },
@@ -685,18 +698,11 @@
              * @param oHeaders {object} Headers if needed.
              */
             post: function (sUrl, oData, funcSuccess, funcError, oHeaders) {
-                if ($rootScope.sAccessToken /*&& $rootScope.sRefreshToken*/) {
-                    var oHeadersPost = Object.assign({
-                        'Authorization': $rootScope.sAccessToken/*,
-                        refresh_token: $rootScope.sRefreshToken,*/
-                    }, oHeaders);
-                }
-
                 var oRequest = {
                     method: "POST",
                     url: sUrl,
                     data: JSON.stringify(oData),
-                    headers: oHeadersPost
+                    headers: this.headers(oHeaders)
                 };
                 return this.request(oRequest, funcSuccess, funcError);
             },

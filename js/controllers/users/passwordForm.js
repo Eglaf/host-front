@@ -6,14 +6,17 @@
      * Customer form controller.
      */
     app.controller('UserPasswordFormCtrl', [
-        '$scope', '$state', '$stateParams', '$timeout', '$sce', '_log', '_func', '_ajax', '_error',
-        function ($scope, $state, $stateParams, $timeout, $sce, _log, _func, _ajax, _error) {
+        '$scope', '$state', '$stateParams', '$timeout', '$sce', '_log', '_func', '_ajax', '_error', 'oUserData',
+        function ($scope, $state, $stateParams, $timeout, $sce, _log, _func, _ajax, _error, oUserData) {
 
             /** @type {object} This controller. */
             var ctrl = this;
 
             /** @type {object} Error service. */
             ctrl.error = _error;
+
+            /** @type {object} */
+            ctrl.oUserData = oUserData.data;
 
             /** @type {string} */
             ctrl.sPassword = '';
@@ -33,15 +36,11 @@
                     _ajax.post('http://host-back/app_dev.php/users/' + $stateParams.userId + '/password/', {
                         'password': ctrl.sPassword
                     }, function (oResponse) {
-                        _log(oResponse);
+                        ctrl.error.processResponse(oResponse);
 
                         $state.go('users-list');
                     }, function (oResponse) {
-                        _log('error', oResponse);
-
                         ctrl.error.processResponse(oResponse);
-                    }, {
-                        // todo headers...
                     });
                 } else {
                     ctrl.error

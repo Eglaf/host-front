@@ -20,8 +20,6 @@
              */
             ctrl.initTable = function () {
 
-                _log(ctrl.aoUsers);
-
                 _table
                     .setScope($scope)
                     .setContainerElemId('_users_table_container')
@@ -39,7 +37,7 @@
                         search: 'string',
                         order: true
                     }, {
-                        text: 'Contact',
+                        text: 'Email',
                         prop: 'contact',
                         search: 'string',
                         order: true
@@ -49,7 +47,7 @@
                         search: 'string',
                         order: true
                     }, {
-                        text: 'Phone number',
+                        text: 'Mobile number',
                         prop: 'phone',
                         search: 'string',
                         order: true
@@ -62,7 +60,8 @@
                         text: '',
                         func: function (oRow) {
                             var sButtons = '';
-                            sButtons += '<a href="#" class="btn btn-default btn-xs">Activate</a> ';
+
+                            sButtons += '<a href="#" class="btn btn-' + (oRow.active ? 'success' : 'danger') + ' btn-xs">Activate</a> ';
                             sButtons += '<a ui-sref="users-password-form({userId:' + oRow.userId + '})" class="btn btn-default btn-xs">Update password</a> ';
                             sButtons += '<a ui-sref="usersReports-flagForm({userId:' + oRow.userId + '})" class="btn btn-default btn-xs">User reports</a> ';
 

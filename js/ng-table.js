@@ -442,12 +442,8 @@ app.factory('_table', ['$rootScope', '$compile', '$filter', '_log', '_func', fun
             sHtml += '<thead>';
 
             angular.forEach(this.aoColumns, function (oColumn) {
-                if (oColumn.order) {
-                    sHtml += '<th ng-click="ctrl.callTableFunc(\'setOrder\', \'' + oColumn.prop + '\', \'' + this.sContainerElemId + '\');">' + oColumn.text + '</th>';
-                }
-                else {
-                    sHtml += '<th>' + oColumn.text + '</th>';
-                }
+                var sClick = (oColumn.order ? 'ng-click="ctrl.callTableFunc(\'setOrder\', \'' + oColumn.prop + '\', \'' + this.sContainerElemId + '\');"' : '');
+                sHtml += '<th ' + sClick + '>' + oColumn.text + '</th>';
             }, this);
 
             sHtml += '</thead>';

@@ -6,13 +6,16 @@
      * UserReports FlagForm controller.
      */
     app.controller('UserReportsFlagFormCtrl', [
-        '$scope', '$state', '$stateParams', '$timeout', '_log', '_func', '_ajax', 'oUserData',
-        function ($scope, $state, $stateParams, $timeout, _log, _func, _ajax, oUserData) {
+        '$scope', '$state', '$stateParams', '$timeout', '_log', '_func', '_ajax', '_error', 'oUserData',
+        function ($scope, $state, $stateParams, $timeout, _log, _func, _ajax, _error, oUserData) {
 
             /** @type {object} This controller. */
             var ctrl = this;
 
-            /** @type {string} */
+            /** @type {object} Error service. */
+            ctrl.error = _error;
+
+            /** @type {object} */
             ctrl.oUserData = oUserData.data;
 
             /** @type {boolean} */
@@ -31,12 +34,12 @@
                     flagPhone: ctrl.oUserData.flag_phone,
                     flagEmail: ctrl.oUserData.flag_email,
                     flagReport: ctrl.oUserData.flag_report
-                }, function (data) {
-                    _log(data);
+                }, function (oResponse) {
+                    ctrl.error.processResponse(oResponse);
 
                     $state.go('users-list');
-                }, function (data) {
-                    _log('error', data);
+                }, function (oResponse) {
+                    ctrl.error.processResponse(oResponse);
                 }, {
                     // todo headers...
                 });
