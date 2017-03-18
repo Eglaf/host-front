@@ -678,8 +678,6 @@
              * @param oHeaders {object} Headers if needed.
              */
             get: function (sUrl, oParams, funcSuccess, funcError, oHeaders) {
-                _log('debug', 'headers');
-                _log('debug', this.headers(oHeaders));
                 var oRequest = {
                     method: "GET",
                     url: sUrl,

@@ -397,25 +397,30 @@ app.factory('_table', ['$rootScope', '$compile', '$filter', '_log', '_func', fun
          * @return {string}
          */
         getTableContentInfo: function () {
-            var iTo = (this.oConfig.rowsOnPage * (this.iCurrentPage+1));
-            iTo = (iTo > this.aoSelectedContent.length ? this.aoSelectedContent.length : iTo);
+            if (this.aoSelectedContent) {
+                var iTo = (this.oConfig.rowsOnPage * (this.iCurrentPage + 1));
+                iTo = (iTo > this.aoSelectedContent.length ? this.aoSelectedContent.length : iTo);
 
-            // Only searched visible.
-            if (this.aoContent.length !== this.aoSelectedContent.length) {
-                return _func.replacePlaceholders(this.oTrans.contentInfoFiltered, {
-                    from: (this.oConfig.rowsOnPage * this.iCurrentPage) + 1,
-                    to: iTo,
-                    all: this.aoSelectedContent.length,
-                    total: this.aoContent.length
-                });
+                // Only searched visible.
+                if (this.aoContent.length !== this.aoSelectedContent.length) {
+                    return _func.replacePlaceholders(this.oTrans.contentInfoFiltered, {
+                        from: (this.oConfig.rowsOnPage * this.iCurrentPage) + 1,
+                        to: iTo,
+                        all: this.aoSelectedContent.length,
+                        total: this.aoContent.length
+                    });
+                }
+                // All visible.
+                else {
+                    return _func.replacePlaceholders(this.oTrans.contentInfo, {
+                        from: (this.oConfig.rowsOnPage * this.iCurrentPage) + 1,
+                        to: iTo,
+                        all: this.aoSelectedContent.length
+                    });
+                }
             }
-            // All visible.
             else {
-                return _func.replacePlaceholders(this.oTrans.contentInfo, {
-                    from: (this.oConfig.rowsOnPage * this.iCurrentPage) + 1,
-                    to: iTo,
-                    all: this.aoSelectedContent.length
-                });
+                _log('error', 'No content!');
             }
         },
 
