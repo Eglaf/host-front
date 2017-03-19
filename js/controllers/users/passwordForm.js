@@ -33,7 +33,8 @@
                 if (ctrl.sPassword.length > 8) {
                     ctrl.error.reset();
 
-                    _ajax.post('http://host-back/app_dev.php/users/' + $stateParams.userId + '/password/', {
+                    _ajax.post('http://host-back/app_dev.php/users/' + ctrl.oUserData.id + '/password/', {
+                        'id': ctrl.oUserData.id,
                         'password': ctrl.sPassword
                     }, function (oResponse) {
                         ctrl.error.processResponse(oResponse);
