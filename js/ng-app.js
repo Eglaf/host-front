@@ -276,7 +276,7 @@
         return {
 
             /**
-             * Check variable for boolean.
+             * To boolean.
              * @param xVar {mixed} Variable to check.
              * @return {boolean} True or false.
              */
@@ -658,7 +658,7 @@
              */
             headers: function (oHeaders) {
                 var oHeadersAll = Object.assign({
-                    'Content-Type': 'application/json',
+                    // 'Content-Type': 'application/json',
                 }, oHeaders);
 
                 if (bHeaderAuthorization && $rootScope.sAccessToken /*&& $rootScope.sRefreshToken*/) {
@@ -667,8 +667,6 @@
                         // 'refresh_token': $rootScope.sRefreshToken
                     });
                 }
-
-                console.debug("wtf", oHeadersAll);
 
                 return oHeadersAll;
             },

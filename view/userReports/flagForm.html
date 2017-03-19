@@ -9,7 +9,7 @@
         <ng-include src="'view/errors.html'"></ng-include>
 
         <label>Contact</label>
-        <input type="text" disabled="disabled" class="form-control" ng-value="ctrl.oUserData.email"/>
+        <input type="text" disabled="disabled" class="form-control" ng-value="ctrl.oUserData.contact"/>
 
         <label>Role</label>
         <input type="text" disabled="disabled" class="form-control" ng-value="ctrl.oUserData.role"/>
@@ -22,12 +22,12 @@
                 </td>
                 <td>
                     <button class="btn btn-success"
-                            ng-show="ctrl.oUserData.flagPhone"
-                            ng-click="ctrl.oUserData.flagPhone = false;">Enabled
+                            ng-show="ctrl.oUserData.flag_phone"
+                            ng-click="ctrl.oUserData.flag_phone = false;">Enabled
                     </button>
                     <button class="btn btn-danger"
-                            ng-hide="ctrl.oUserData.flagPhone"
-                            ng-click="ctrl.oUserData.flagPhone = true;">Disabled
+                            ng-hide="ctrl.oUserData.flag_phone"
+                            ng-click="ctrl.oUserData.flag_hone = true;">Disabled
                     </button>
                 </td>
             </tr>
@@ -37,12 +37,12 @@
                 </td>
                 <td>
                     <button class="btn btn-success"
-                            ng-show="ctrl.oUserData.flagEmail"
-                            ng-click="ctrl.oUserData.flagEmail = false;">Enabled
+                            ng-show="ctrl.oUserData.flag_email"
+                            ng-click="ctrl.oUserData.flag_email = false;">Enabled
                     </button>
                     <button class="btn btn-danger"
-                            ng-hide="ctrl.oUserData.flagEmail"
-                            ng-click="ctrl.oUserData.flagEmail = true;">Disabled
+                            ng-hide="ctrl.oUserData.flag_email"
+                            ng-click="ctrl.oUserData.flag_email = true;">Disabled
                     </button>
                 </td>
             </tr>
@@ -52,12 +52,12 @@
                 </td>
                 <td>
                     <button class="btn btn-success"
-                            ng-show="ctrl.oUserData.flagReport"
-                            ng-click="ctrl.oUserData.flagReport = false;">Enabled
+                            ng-show="ctrl.oUserData.flag_report"
+                            ng-click="ctrl.oUserData.flag_report = false;">Enabled
                     </button>
                     <button class="btn btn-danger"
-                            ng-hide="ctrl.oUserData.flagReport"
-                            ng-click="ctrl.oUserData.flagReport = true;">Disabled
+                            ng-hide="ctrl.oUserData.flag_report"
+                            ng-click="ctrl.oUserData.flag_report = true;">Disabled
                     </button>
                 </td>
             </tr>
