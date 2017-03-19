@@ -35,8 +35,6 @@
                     flagEmail: ctrl.oUserData.flag_email,
                     flagReport: ctrl.oUserData.flag_report
                 }, function (oResponse) {
-                    ctrl.error.processResponse(oResponse);
-
                     $state.go('users-list');
                 }, function (oResponse) {
                     ctrl.error.processResponse(oResponse);
