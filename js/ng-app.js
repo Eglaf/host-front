@@ -277,7 +277,7 @@
 
             /**
              * To boolean.
-             * @param xVar {mixed} Variable to check.
+             * @param xVar {mixed} Variable to bool.
              * @return {boolean} True or false.
              */
             boolVal: function (xVar) {

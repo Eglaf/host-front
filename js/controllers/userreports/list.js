@@ -76,9 +76,9 @@
             ctrl.getUserButtons = function (oUser) {
                 var sResult = '';
 
-                sResult += '<span class="btn ' + (oUser.flag_phone ? 'btn-success' : 'btn-danger') + ' btn-xs" ng-click="ctrl.flagChange(' + oUser.id + ', \'flag_phone\');">Flag Phone</span> ';
-                sResult += '<span class="btn ' + (oUser.flag_email ? 'btn-success' : 'btn-danger') + ' btn-xs" ng-click="ctrl.flagChange(' + oUser.id + ', \'flag_email\');">Flag Email</span> ';
-                sResult += '<span class="btn ' + (oUser.flag_report ? 'btn-success' : 'btn-danger') + ' btn-xs" ng-click="ctrl.flagChange(' + oUser.id + ', \'flag_report\');">Flag Report</span> ';
+                sResult += '<span class="btn ' + (oUser.flag_phone ? 'btn-success' : 'btn-danger') + ' btn-xs" ng-click="ctrl.flagChange(' + oUser.id + ', \'flag_phone\');">Phone</span> ';
+                sResult += '<span class="btn ' + (oUser.flag_email ? 'btn-success' : 'btn-danger') + ' btn-xs" ng-click="ctrl.flagChange(' + oUser.id + ', \'flag_email\');">Email</span> ';
+                sResult += '<span class="btn ' + (oUser.flag_report ? 'btn-success' : 'btn-danger') + ' btn-xs" ng-click="ctrl.flagChange(' + oUser.id + ', \'flag_report\');">Report</span> ';
 
                 return sResult;
             };
