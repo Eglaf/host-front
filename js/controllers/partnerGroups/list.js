@@ -45,8 +45,7 @@
 
                             sButtons += '<a ui-sref="partnerGroups-customersList({partnerId:' + oRow.id + '})" class="btn btn-default btn-xs">Customers</a> ';
                             sButtons += '<a ui-sref="partner-contacts({id:' + oRow.id + '})" class="btn btn-default btn-xs">Contacts</a> ';
-                            sButtons += '<a href="#" class="btn btn-danger btn-xs">Hosts</a> ';
-                            sButtons += '<a href="#" class="btn btn-danger btn-xs">Add customer</a> ';
+                            sButtons += '<a href="#" class="btn btn-danger btn-xs">Add customer</a>';
 
                             return sButtons;
                         }

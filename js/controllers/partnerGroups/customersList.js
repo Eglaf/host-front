@@ -38,7 +38,11 @@
                     }, {
                         text: '',
                         func: function (oRow) {
-                            return '';
+                            var sButtons = '';
+
+                            sButtons += '<a href="#" class="btn btn-danger btn-xs">Hosts</a> ';
+
+                            return sButtons;
                         }
                     }])
                     .setContent(ctrl.aoPartnerGroupCustomersData.customers)
