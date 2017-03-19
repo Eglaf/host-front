@@ -41,6 +41,8 @@
                             var sButtons = '';
 
                             sButtons += '<a href="#" class="btn btn-danger btn-xs">Hosts</a> ';
+                            sButtons += '<a href="#" class="btn btn-danger btn-xs">Add hosts</a> ';
+                            sButtons += '<a href="#" class="btn btn-danger btn-xs">Add contact</a> ';
 
                             return sButtons;
                         }
