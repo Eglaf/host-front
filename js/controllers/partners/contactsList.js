@@ -22,6 +22,9 @@
              * Initialize.
              */
             ctrl.initTable = function () {
+
+                $rootScope.referrer = 'contacts';
+
                 _table
                     .setScope($scope)
                     .setContainerElemId('_partnergroup_table_container')

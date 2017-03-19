@@ -3,8 +3,8 @@
     'use strict';
 
     app.controller('UsersListCtrl', [
-        '$scope', '$state', '$stateParams', '$timeout', '$filter', '_log', '_func', '_table', 'aoUsersData',
-        function ($scope, $state, $stateParams, $timeout, $filter, _log, _func, _table, aoUsersData) {
+        '$rootScope', '$scope', '$state', '$stateParams', '$timeout', '$filter', '_log', '_func', '_table', 'aoUsersData',
+        function ($rootScope, $scope, $state, $stateParams, $timeout, $filter, _log, _func, _table, aoUsersData) {
 
             /** @type {object} This controller. */
             var ctrl = this;
@@ -19,6 +19,8 @@
              * Initialize.
              */
             ctrl.initTable = function () {
+
+                $rootScope.referrer = 'users';
 
                 _table
                     .setScope($scope)
