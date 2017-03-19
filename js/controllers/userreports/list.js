@@ -26,7 +26,7 @@
                     .setScope($scope)
                     .setContainerElemId('_users_table_container')
                     .setConfig({
-                        orderByProperty: 'fullName',
+                        orderByProperty: 'name',
                         orderDirectionReversed: false,
                         rowsOnPage: 5
                     })
@@ -34,12 +34,12 @@
                         globalSearchPlaceholder: 'Search'
                     })
                     .setColumns([{
-                        text: 'Full name',
-                        prop: 'fullName',
+                        text: 'Name',
+                        prop: 'name',
                         search: 'string',
                         order: true
                     }, {
-                        text: 'Contact',
+                        text: 'Email',
                         prop: 'contact',
                         search: 'string',
                         order: true
@@ -49,8 +49,8 @@
                         search: 'string',
                         order: true
                     }, {
-                        text: 'Phone number',
-                        prop: 'phoneNumber',
+                        text: 'Mobile number',
+                        prop: 'phone',
                         search: 'string',
                         order: true
                     }, {
@@ -61,7 +61,7 @@
                     }, {
                         text: '',
                         func: function (oUser) {
-                            return '<div id="buttons' + oUser.userId + '">' + ctrl.getUserButtons(oUser) + '</div>';
+                            return '<div id="buttons' + oUser.id + '">' + ctrl.getUserButtons(oUser) + '</div>';
                         }
                     }])
                     .setContent(ctrl.aoUsers)
@@ -76,9 +76,9 @@
             ctrl.getUserButtons = function (oUser) {
                 var sResult = '';
 
-                sResult += '<span class="btn ' + (oUser.flag_phone ? 'btn-success' : 'btn-danger') + ' btn-xs" ng-click="ctrl.flagChange(' + oUser.userId + ', \'flag_phone\');">Flag Phone</span> ';
-                sResult += '<span class="btn ' + (oUser.flag_email ? 'btn-success' : 'btn-danger') + ' btn-xs" ng-click="ctrl.flagChange(' + oUser.userId + ', \'flag_email\');">Flag Email</span> ';
-                sResult += '<span class="btn ' + (oUser.flag_report ? 'btn-success' : 'btn-danger') + ' btn-xs" ng-click="ctrl.flagChange(' + oUser.userId + ', \'flag_report\');">Flag Report</span> ';
+                sResult += '<span class="btn ' + (oUser.flag_phone ? 'btn-success' : 'btn-danger') + ' btn-xs" ng-click="ctrl.flagChange(' + oUser.id + ', \'flag_phone\');">Flag Phone</span> ';
+                sResult += '<span class="btn ' + (oUser.flag_email ? 'btn-success' : 'btn-danger') + ' btn-xs" ng-click="ctrl.flagChange(' + oUser.id + ', \'flag_email\');">Flag Email</span> ';
+                sResult += '<span class="btn ' + (oUser.flag_report ? 'btn-success' : 'btn-danger') + ' btn-xs" ng-click="ctrl.flagChange(' + oUser.id + ', \'flag_report\');">Flag Report</span> ';
 
                 return sResult;
             };
@@ -112,7 +112,7 @@
                     var sButtons = ctrl.getUserButtons(oUser);
                     var sCompiledButtons = $compile(sButtons)($scope);
 
-                    angular.element(_func.elemId('buttons' + oUser.userId))
+                    angular.element(_func.elemId('buttons' + oUser.id))
                         .html(sCompiledButtons);
                 }, function (data) {
                     _log('error', data);
