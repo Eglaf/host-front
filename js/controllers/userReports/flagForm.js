@@ -30,7 +30,7 @@
             ctrl.submit = function () {
                 _log('CustomerFormCtrl submit');
 
-                _ajax.post(sBackendUrl + 'users/' + $stateParams.userId + '/settings/', {
+                _ajax.post(sBackendUrl + 'users/' + $stateParams.id + '/settings/', {
                     flagPhone: ctrl.oUserData.flag_phone,
                     flagEmail: ctrl.oUserData.flag_email,
                     flagReport: ctrl.oUserData.flag_report
