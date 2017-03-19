@@ -91,7 +91,7 @@
             ctrl.flagChange = function (iUserId, sThat) {
                 _log('flagChange(' + iUserId + ', ' + sThat + ')');
 
-                var oUser = _func.findInArrayOfObjectsBy(ctrl.aoUsers, 'userId', iUserId);
+                var oUser = _func.findInArrayOfObjectsBy(ctrl.aoUsers, 'id', iUserId);
                 oUser[sThat] = !oUser[sThat];
                 var oFrackingAutoParseToString = {
                     flagPhone: (oUser.flag_phone ? 1 : 0),

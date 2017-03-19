@@ -657,7 +657,9 @@
              * @param oHeaders {object}
              */
             headers: function (oHeaders) {
-                var oHeadersAll = Object.assign({}, oHeaders);
+                var oHeadersAll = Object.assign({
+                    'Content-Type': 'application/json',
+                }, oHeaders);
 
                 if (bHeaderAuthorization && $rootScope.sAccessToken /*&& $rootScope.sRefreshToken*/) {
                     oHeadersAll = Object.assign(oHeadersAll, {
@@ -665,6 +667,8 @@
                         // 'refresh_token': $rootScope.sRefreshToken
                     });
                 }
+
+                console.debug("wtf", oHeadersAll);
 
                 return oHeadersAll;
             },
