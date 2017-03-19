@@ -1,17 +1,15 @@
 <ng-include src="'view/pre.html'"></ng-include>
 
-<h1>Partners</h1>
+<h1>Contacts</h1>
 
 <div class="content-box">
 
-    <a ui-sref="partner-create" class="btn btn-primary">
-        Create partner
+    <a ui-sref="partner-contactForm({id: ctrl.iStateParam})" class="btn btn-primary">
+        Create contact
     </a>
 
-    <br/>
-
     <div ng-init="ctrl.initTable();">
-        <div id="_partners_table_container"></div>
+        <div id="_partnergroup_table_container"></div>
     </div>
 
 </div>

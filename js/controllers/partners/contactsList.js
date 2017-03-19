@@ -2,21 +2,21 @@
 
     'use strict';
 
-    /**
-     * HostType list controller.
-     */
-    app.controller('HostTypeListCtrl', [
-        '$scope', '$state', '$stateParams', '$timeout', '$filter', '_log', '_func', '_table', 'aoHostTypesData',
-        function ($scope, $state, $stateParams, $timeout, $filter, _log, _func, _table, aoHostTypesData) {
+    app.controller('PartnerContactsListCtrl', [
+        '$scope', '$state', '$stateParams', '$timeout', '$compile', '$filter', '_log', '_func', '_table', '_ajax', 'aoPartnerContactsData',
+        function ($scope, $state, $stateParams, $timeout, $compile, $filter, _log, _func, _table, _ajax, aoPartnerContactsData) {
 
             /** @type {object} This controller. */
             var ctrl = this;
 
-            /** @type {object[]} Host types. */
-            ctrl.aoHostTypes = aoHostTypesData;
+            /** @type {object[]} Users. */
+            ctrl.aoPartnerContactsData = aoPartnerContactsData.data;
 
             /** @type {string} Name of current route state. */
             ctrl.sCurrentRoute = $state.current.name;
+
+            /** @type {number} No comment hack. */
+            ctrl.iStateParam = $stateParams.id;
 
             /**
              * Initialize.
@@ -24,9 +24,9 @@
             ctrl.initTable = function () {
                 _table
                     .setScope($scope)
-                    .setContainerElemId('_host_types_table_container')
+                    .setContainerElemId('_partnergroup_table_container')
                     .setConfig({
-                        orderByProperty: 'name',
+                        orderByProperty: 'contact',
                         orderDirectionReversed: false,
                         rowsOnPage: 5
                     })
@@ -34,28 +34,21 @@
                         globalSearchPlaceholder: 'Search'
                     })
                     .setColumns([{
-                        text: 'ID',
-                        prop: 'id',
-                        search: 'string',
-                        order: true
-                    }, {
                         text: 'Name',
-                        prop: 'name',
-                        search: 'string',
-                        order: true
-                    }, {
-                        text: 'Description',
-                        prop: 'description',
+                        prop: 'contact',
                         search: 'string',
                         order: true
                     }, {
                         text: '',
-                        func: function (obj) {
-                            return '<a ui-sref="hostType-update({id:' + obj.id + '})" class="btn btn-default btn-xs">Update</a>'
-                        },
-                        search: 'string'
+                        func: function (oRow) {
+                            var sButtons = '';
+
+                            sButtons += '<a ui-sref="usersReports-flagForm({userId:' + oRow.id + '})" class="btn btn-default btn-xs">Reports</a> ';
+
+                            return sButtons;
+                        }
                     }])
-                    .setContent(ctrl.aoHostTypes)
+                    .setContent(ctrl.aoPartnerContactsData)
                     .loadTable();
             };
 

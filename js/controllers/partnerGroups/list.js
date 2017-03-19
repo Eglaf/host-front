@@ -35,13 +35,18 @@
                     })
                     .setColumns([{
                         text: 'Name',
-                        prop: 'partnerName',
+                        prop: 'name',
                         search: 'string',
                         order: true
                     }, {
                         text: '',
-                        func: function (oPartnerGroup) {
-                            return '';
+                        func: function (oRow) {
+                            var sButtons = '';
+
+                            sButtons += '<a ui-sref="partnerGroups-customersList({partnerId:' + oRow.id + '})" class="btn btn-default btn-xs">Customers</a> ';
+                            sButtons += '<a ui-sref="partner-contacts({id:' + oRow.id + '})" class="btn btn-default btn-xs">Contacts</a> ';
+
+                            return sButtons;
                         }
                     }])
                     .setContent(ctrl.aoPartnerGroupsData)

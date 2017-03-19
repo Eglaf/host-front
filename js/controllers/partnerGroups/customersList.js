@@ -2,15 +2,15 @@
 
     'use strict';
 
-    app.controller('HostListCtrl', [
-        '$scope', '$state', '$stateParams', '$timeout', '$filter', '_log', '_func', '_table', 'aoHostsData',
-        function ($scope, $state, $stateParams, $timeout, $filter, _log, _func, _table, aoHostsData) {
+    app.controller('PartnerGroupCustomersListCtrl', [
+        '$scope', '$state', '$stateParams', '$timeout', '$compile', '$filter', '_log', '_func', '_table', '_ajax', 'aoPartnerGroupCustomersData',
+        function ($scope, $state, $stateParams, $timeout, $compile, $filter, _log, _func, _table, _ajax, aoPartnerGroupCustomersData) {
 
             /** @type {object} This controller. */
             var ctrl = this;
 
-            /** @type {object[]} Hosts. */
-            ctrl.aoHosts = aoHostsData;
+            /** @type {object[]} Users. */
+            ctrl.aoPartnerGroupCustomersData = aoPartnerGroupCustomersData.data;
 
             /** @type {string} Name of current route state. */
             ctrl.sCurrentRoute = $state.current.name;
@@ -21,9 +21,9 @@
             ctrl.initTable = function () {
                 _table
                     .setScope($scope)
-                    .setContainerElemId('_hosts_table_container')
+                    .setContainerElemId('_partnergroup_table_container')
                     .setConfig({
-                        orderByProperty: 'label',
+                        orderByProperty: 'name',
                         orderDirectionReversed: false,
                         rowsOnPage: 5
                     })
@@ -31,33 +31,17 @@
                         globalSearchPlaceholder: 'Search'
                     })
                     .setColumns([{
-                        text: 'ID',
-                        prop: 'id',
-                        search: 'string',
-                        order: true
-                    }, {
-                        text: 'Customer',
-                        prop: 'customer',
-                        search: 'string',
-                        order: true
-                    }, {
-                        text: 'Url',
-                        prop: 'url',
-                        search: 'string',
-                        order: true
-                    }, {
-                        text: 'Ip',
-                        prop: 'ip',
+                        text: 'Name',
+                        prop: 'name',
                         search: 'string',
                         order: true
                     }, {
                         text: '',
-                        func: function (obj) {
-                            return '<a ui-sref="host-update({id:' + obj.id + '})" class="btn btn-default btn-xs">Update</a>'
-                        },
-                        search: 'string'
+                        func: function (oRow) {
+                            return '';
+                        }
                     }])
-                    .setContent(ctrl.aoHosts)
+                    .setContent(ctrl.aoPartnerGroupCustomersData.customers)
                     .loadTable();
             };
 

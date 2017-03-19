@@ -1,14 +1,13 @@
 <ng-include src="'view/pre.html'"></ng-include>
 
-<h1 ng-show="ctrl.isUpdate()">PartnerGroup update</h1>
-<h1 ng-hide="ctrl.isUpdate()">PartnerGroup create</h1>
+<h1>PartnerGroup create</h1>
 
 <form class="content-box">
 
     <div class="form-group">
         <label for="name">Name</label>
         <input type="text" id="name" class="form-control" placeholder="Enter email" aria-describedby="nameHelp"
-               ng-model="ctrl.oPartnerGroup.name">
+               ng-model="ctrl.sPartnerName">
         <small id="emailHelp" class="form-text text-muted">Name.</small>
     </div>
 
