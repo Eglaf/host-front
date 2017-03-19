@@ -93,17 +93,13 @@
 
                 var oUser = _func.findInArrayOfObjectsBy(ctrl.aoUsers, 'id', iUserId);
                 oUser[sThat] = !oUser[sThat];
-                var oFrackingAutoParseToString = {
+                var oParseToString = {
                     flagPhone: _func.boolVal(oUser.flag_phone),
                     flagEmail: _func.boolVal(oUser.flag_email),
                     flagReport: _func.boolVal(oUser.flag_report)
                 };
 
-                _log('debug', 'Sent data', oFrackingAutoParseToString);
-
-                _ajax.post(sBackendUrl + 'users/' + iUserId + '/settings/', oFrackingAutoParseToString, function (oSomeStringSheet) {
-
-                    _log('debug', 'Received data', oSomeStringSheet.data);
+                _ajax.post(sBackendUrl + 'users/' + iUserId + '/settings/', oParseToString, function (oSomeStringSheet) {
 
                     oUser.flag_phone = (oSomeStringSheet.data.flag_phone == "1" ? 1 : 0);
                     oUser.flag_email = (oSomeStringSheet.data.flag_email == "1" ? 1 : 0);
