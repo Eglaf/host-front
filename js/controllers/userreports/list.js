@@ -96,7 +96,7 @@
                 var oFrackingAutoParseToString = {
                     flagPhone: _func.boolVal(oUser.flag_phone),
                     flagEmail: _func.boolVal(oUser.flag_email),
-                    flagReport: _func.boolVal(oUser.flag_report),
+                    flagReport: _func.boolVal(oUser.flag_report)
                 };
 
                 _log('debug', 'Sent data', oFrackingAutoParseToString);
