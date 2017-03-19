@@ -62,8 +62,8 @@
                             var sButtons = '';
 
                             sButtons += '<a href="#" class="btn btn-' + (oRow.active ? 'success' : 'danger') + ' btn-xs">Activate</a> ';
-                            sButtons += '<a ui-sref="users-password-form({userId:' + oRow.userId + '})" class="btn btn-default btn-xs">Update password</a> ';
-                            sButtons += '<a ui-sref="usersReports-flagForm({userId:' + oRow.userId + '})" class="btn btn-default btn-xs">User reports</a> ';
+                            sButtons += '<a ui-sref="users-password-form({userId:' + oRow.id + '})" class="btn btn-default btn-xs">Update password</a> ';
+                            sButtons += '<a ui-sref="usersReports-flagForm({userId:' + oRow.id + '})" class="btn btn-default btn-xs">User reports</a> ';
 
                             return sButtons;
                         }
