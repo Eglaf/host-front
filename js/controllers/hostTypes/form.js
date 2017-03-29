@@ -10,7 +10,7 @@
             var ctrl = this;
 
             /** @type {object} Error service. */
-            ctrl.error = _error;
+            ctrl.error = _error.reset();
 
             /** @type {string} Name of current route state. */
             ctrl.sCurrentRoute = $state.current.name;
@@ -29,7 +29,7 @@
 
                 ctrl.error.reset();
 
-                _ajax.post(sBackendUrl + 'hosttypes/', ctrl.oContact, function (oResponse) {
+                _ajax.post(sBackendUrl + 'hosttypes/', ctrl.oHostType, function (oResponse) {
                     $state.go('hostTypes-list');
                 }, function (oResponse) {
                     ctrl.error.processResponse(oResponse);

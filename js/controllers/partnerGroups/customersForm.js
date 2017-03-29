@@ -18,7 +18,7 @@
             /** @type {string} Name of current route state. */
             ctrl.sCurrentRoute = $state.current.name;
 
-            /** @type {object} Contact info. */
+            /** @type {object} Customer info. */
             ctrl.oCustomer = {
                 name: ''
             };
@@ -31,7 +31,7 @@
 
                 ctrl.error.reset();
 
-                _ajax.post(sBackendUrl + 'customers/', ctrl.oContact, function (oResponse) {
+                _ajax.post(sBackendUrl + 'customers/', ctrl.oCustomer, function (oResponse) {
                     $state.go('partnerGroups-customersList', {partnerId: params.partnerId});
                 }, function (oResponse) {
                     ctrl.error.processResponse(oResponse);
