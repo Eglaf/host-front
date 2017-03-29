@@ -232,8 +232,7 @@
                         $state.go('authenticate');
                     } else {
                         this.iStatusCode = oResponse.status;
-
-                        if (Array.isArray(oResponse.data.errors)) {
+                        if (oResponse.data && Array.isArray(oResponse.data.errors)) {
                             this.aoErrors = oResponse.data.errors;
                         } else {
                             this.aoErrors = [{

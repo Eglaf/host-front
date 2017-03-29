@@ -20,7 +20,8 @@
 
             /** @type {object} Customer info. */
             ctrl.oCustomer = {
-                name: ''
+                customerName: '',
+                groupId: $stateParams.partnerId
             };
 
             /**
