@@ -73,6 +73,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
+        .state('partnerGroups-create', {
+            url: '/partner-groups/create',
+            templateUrl: 'view/partnerGroups/form.html',
+            controller: 'PartnerGroupFormCtrl',
+            controllerAs: 'ctrl'
+        })
+        // PartnerGroups - customers
         .state('partnerGroups-customersList', {
             url: '/partner-groups/{partnerId}/customers/list',
             templateUrl: 'view/partnerGroups/customersList.html',
@@ -84,12 +91,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
-        .state('partnerGroups-create', {
-            url: '/partner-groups/create',
-            templateUrl: 'view/partnerGroups/form.html',
-            controller: 'PartnerGroupFormCtrl',
+        .state('partnerGroups-customersForm', {
+            url: '/partner-groups/{partnerId}/customers/form',
+            templateUrl: 'view/partnerGroups/customersForm.html',
+            controller: 'PartnerGroupCustomersFormCtrl',
             controllerAs: 'ctrl'
         })
+        // Partners - contacts
         .state('partner-contacts', {
             url: '/partner/{id}/contacts/list',
             templateUrl: 'view/partners/contactsList.html',

@@ -10,7 +10,7 @@
             var ctrl = this;
 
             /** @type {object} Error service. */
-            ctrl.error = _error;
+            ctrl.error = _error.reset();
 
             /** @type {string} Name of current route state. */
             ctrl.sCurrentRoute = $state.current.name;

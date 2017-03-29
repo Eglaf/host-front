@@ -13,7 +13,7 @@
             var ctrl = this;
 
             /** @type {object} Error service. */
-            ctrl.error = _error;
+            ctrl.error = _error.reset();
 
             /** @type {object} */
             ctrl.oUserData = oUserData.data;

@@ -208,6 +208,8 @@
              * Reset errors.
              */
             reset: function () {
+                _log('error.reset()');
+
                 this.aoErrors = [];
 
                 return this;
@@ -218,7 +220,10 @@
              * @param oResponse
              */
             processResponse: function (oResponse) {
-                if (oResponse.status !== 200) {
+                if (oResponse.status === 200) {
+                    this.reset();
+                }
+                else {
                     _log('error processResponse');
 
                     if (oResponse.status === 401) {

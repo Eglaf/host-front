@@ -2,7 +2,7 @@
 
     'use strict';
 
-    app.controller('PartnerContactFormCtrl', [
+    app.controller('PartnerGroupCustomersFormCtrl', [
         '$scope', '$state', '$stateParams', '_log', '_func', '_ajax', '_error',
         function ($scope, $state, $stateParams, _log, _func, _ajax, _error) {
 
@@ -12,15 +12,15 @@
             /** @type {object} Error service. */
             ctrl.error = _error.reset();
 
+            /** @type {object} StateParams. */
+            ctrl.params = $stateParams;
+
             /** @type {string} Name of current route state. */
             ctrl.sCurrentRoute = $state.current.name;
 
             /** @type {object} Contact info. */
-            ctrl.oContact = {
-                username: '',
-                password: '',
-                fullName: '',
-                phoneNumber: ''
+            ctrl.oCustomer = {
+                name: ''
             };
 
             /**
@@ -31,10 +31,8 @@
 
                 ctrl.error.reset();
 
-                _ajax.post(sBackendUrl + 'partners/' + $stateParams.id + '/contact/', ctrl.oContact, function (oResponse) {
-                    $state.go('partner-contacts', {
-                        id: $stateParams.id
-                    });
+                _ajax.post(sBackendUrl + 'customers/', ctrl.oContact, function (oResponse) {
+                    $state.go('partnerGroups-customersList', {partnerId: params.partnerId});
                 }, function (oResponse) {
                     ctrl.error.processResponse(oResponse);
                 });
