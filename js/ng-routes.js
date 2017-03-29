@@ -61,6 +61,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
+        // PartnerGroups and partners... is it the same or not? maybe... who knows...
         .state('partnerGroups-list', {
             url: '/partner-groups/list',
             templateUrl: 'view/partnerGroups/list.html',
@@ -104,6 +105,24 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/partner/{id}/contacts/create',
             templateUrl: 'view/partners/contactForm.html',
             controller: 'PartnerContactFormCtrl',
+            controllerAs: 'ctrl'
+        })
+        // Host types
+        .state('hostTypes-list', {
+            url: '/host-types/list',
+            templateUrl: 'view/hostTypes/list.html',
+            controller: 'HostTypeListCtrl',
+            controllerAs: 'ctrl',
+            resolve: {
+                aoHostTypesData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
+                    return _ajax.get(sBackendUrl + 'hosttypes/');
+                }]
+            }
+        })
+        .state('hostTypes-create', {
+            url: '/host-types/create',
+            templateUrl: 'view/hostTypes/form.html',
+            controller: 'HostTypeFormCtrl',
             controllerAs: 'ctrl'
         })
     ;

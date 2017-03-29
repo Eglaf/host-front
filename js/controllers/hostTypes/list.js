@@ -2,15 +2,15 @@
 
     'use strict';
 
-    app.controller('PartnerContactsListCtrl', [
-        '$rootScope', '$scope', '$state', '$stateParams', '$timeout', '$compile', '$filter', '_log', '_func', '_table', '_ajax', 'aoPartnerContactsData',
-        function ($rootScope, $scope, $state, $stateParams, $timeout, $compile, $filter, _log, _func, _table, _ajax, aoPartnerContactsData) {
+    app.controller('HostTypeListCtrl', [
+        '$rootScope', '$scope', '$state', '$stateParams', '$timeout', '$compile', '$filter', '_log', '_func', '_table', '_ajax', 'aoHostTypesData',
+        function ($rootScope, $scope, $state, $stateParams, $timeout, $compile, $filter, _log, _func, _table, _ajax, aoHostTypesData) {
 
             /** @type {object} This controller. */
             var ctrl = this;
 
             /** @type {object[]} Users. */
-            ctrl.aoPartnerContactsData = aoPartnerContactsData.data;
+            ctrl.aoHostTypesData = aoHostTypesData.data;
 
             /** @type {string} Name of current route state. */
             ctrl.sCurrentRoute = $state.current.name;
@@ -23,13 +23,13 @@
              */
             ctrl.initTable = function () {
 
-                $rootScope.referrer = 'contacts';
+                $rootScope.referrer = 'hostTypes';
 
                 _table
                     .setScope($scope)
-                    .setContainerElemId('_partnergroup_table_container')
+                    .setContainerElemId('_hosttype_table_container')
                     .setConfig({
-                        orderByProperty: 'contact',
+                        orderByProperty: 'name',
                         orderDirectionReversed: false,
                         rowsOnPage: 5
                     })
@@ -38,7 +38,12 @@
                     })
                     .setColumns([{
                         text: 'Name',
-                        prop: 'contact',
+                        prop: 'name',
+                        search: 'string',
+                        order: true
+                    }, {
+                        text: 'Description',
+                        prop: 'description',
                         search: 'string',
                         order: true
                     }, {
@@ -46,12 +51,12 @@
                         func: function (oRow) {
                             var sButtons = '';
 
-                            sButtons += '<a ui-sref="usersReports-flagForm({userId:' + oRow.id + '})" class="btn btn-default btn-xs">Reports</a> ';
+                            // sButtons += '<a ui-sref="usersReports-flagForm({userId:' + oRow.id + '})" class="btn btn-default btn-xs">Reports</a> ';
 
                             return sButtons;
                         }
                     }])
-                    .setContent(ctrl.aoPartnerContactsData)
+                    .setContent(ctrl.aoHostTypesData)
                     .loadTable();
             };
 

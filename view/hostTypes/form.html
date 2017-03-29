@@ -1,0 +1,32 @@
+<ng-include src="'view/pre.html'"></ng-include>
+
+<h1>Host type create</h1>
+
+<form class="content-box">
+
+    <ng-include src="'view/errors.html'"></ng-include>
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" class="form-control" placeholder="Enter name"
+               ng-model="ctrl.oHostType.name">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" id="description" class="form-control" placeholder="Enter description"
+               ng-model="ctrl.oHostType.description">
+    </div>
+
+    <button class="btn btn-primary"
+            ng-click="ctrl.submit()">
+        Save
+    </button>
+
+    <a ui-sref="hostTypes-list" class="btn btn-default">
+        Back
+    </a>
+
+</form>
+
+<ng-include src="'view/post.html'"></ng-include>
