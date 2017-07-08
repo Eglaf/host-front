@@ -133,6 +133,18 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'HostTypeFormCtrl',
             controllerAs: 'ctrl'
         })
+        // Hosts
+        .state('hosts-list', {
+            url: '/customer/{customerId}/hosts/list',
+            templateUrl: 'view/hosts/list.html',
+            controller: 'HostListCtrl',
+            controllerAs: 'ctrl',
+            resolve: {
+                aoHostsData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
+                    return _ajax.get(sBackendUrl + 'customer/' + $stateParams.customerId);
+                }]
+            }
+        })
     ;
 
     $urlRouterProvider.otherwise('/authenticate');
