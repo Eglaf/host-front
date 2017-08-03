@@ -1,6 +1,6 @@
 <ng-include src="'view/pre.html'"></ng-include>
 
-<h1>PartnerGroup create</h1>
+<h1>Partner customer contact create</h1>
 
 <form class="content-box">
 
@@ -9,28 +9,28 @@
     <div class="form-group">
         <label for="name">Username (email)</label>
         <input type="text" id="name" class="form-control" placeholder="Enter email" aria-describedby="nameHelp"
-               ng-model="ctrl.oContact.username">
+               ng-model="ctrl.oForm.username">
         <small id="emailHelp" class="form-text text-muted">Username (email).</small>
     </div>
 
     <div class="form-group">
         <label for="password">Password</label>
         <input type="password" id="password" class="form-control" placeholder="Enter password" aria-describedby="passwordHelp"
-               ng-model="ctrl.oContact.password">
+               ng-model="ctrl.oForm.password">
         <small id="passwordHelp" class="form-text text-muted">Password.</small>
     </div>
 
     <div class="form-group">
         <label for="fullName">Full name</label>
         <input type="text" id="fullName" class="form-control" placeholder="Enter full name" aria-describedby="fullNameHelp"
-               ng-model="ctrl.oContact.fullName">
+               ng-model="ctrl.oForm.fullName">
         <small id="fullNameHelp" class="form-text text-muted">Full name.</small>
     </div>
 
     <div class="form-group">
         <label for="phone">Phone number</label>
         <input type="text" id="phone" class="form-control" placeholder="Enter phone number" aria-describedby="phoneHelp"
-               ng-model="ctrl.oContact.phoneNumber">
+               ng-model="ctrl.oForm.phoneNumber">
         <small id="phoneHelp" class="form-text text-muted">Phone number.</small>
     </div>
 
@@ -39,9 +39,10 @@
         Save
     </button>
 
-    <a ui-sref="partnerGroups-list" class="btn btn-default">
+    <button class="btn btn-default"
+            ng-click="ctrl.goBack()">
         Back
-    </a>
+    </button>
 
 </form>
 

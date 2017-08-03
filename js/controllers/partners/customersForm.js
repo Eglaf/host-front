@@ -2,7 +2,7 @@
 
     'use strict';
 
-    app.controller('PartnerGroupCustomersFormCtrl', [
+    app.controller('PartnersCustomersFormCtrl', [
         '$scope', '$state', '$stateParams', '_log', '_func', '_ajax', '_error',
         function ($scope, $state, $stateParams, _log, _func, _ajax, _error) {
 
@@ -33,7 +33,7 @@
                 ctrl.error.reset();
 
                 _ajax.post(sBackendUrl + 'customers/', ctrl.oCustomer, function (oResponse) {
-                    $state.go('partnerGroups-customersList', {partnerId: params.partnerId});
+                    $state.go('partners-customersList', {partnerId: params.partnerId});
                 }, function (oResponse) {
                     ctrl.error.processResponse(oResponse);
                 });

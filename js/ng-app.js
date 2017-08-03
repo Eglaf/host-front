@@ -671,6 +671,9 @@
                         // 'refresh_token': $rootScope.sRefreshToken
                     });
                 }
+                else {
+                    console.warn("NO bHeaderAuthorization && rs.sAccessToken " + $rootScope.sAccessToken);
+                }
 
                 return oHeadersAll;
             },

@@ -1,0 +1,22 @@
+<ng-include src="'view/pre.html'"></ng-include>
+
+<h1>Partners customers contacts list</h1>
+
+<div class="content-box">
+
+    <a ui-sref="partners-customers-contactsForm({partnerId: ctrl.oStateParams.partnerId, customerId: ctrl.oStateParams.customerId})" class="btn btn-primary">
+        Create contact
+    </a>
+
+    <div ng-init="ctrl.initTable();">
+        <div id="partners_customers_contacts_table_container"></div>
+    </div>
+
+    <button class="btn btn-default"
+            ng-click="ctrl.goBack()">
+        Back
+    </button>
+
+</div>
+
+<ng-include src="'view/post.html'"></ng-include>

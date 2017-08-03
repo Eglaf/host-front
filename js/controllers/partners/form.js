@@ -2,7 +2,7 @@
 
     'use strict';
 
-    app.controller('PartnerGroupFormCtrl', [
+    app.controller('PartnersFormCtrl', [
         '$scope', '$state', '$stateParams', '_log', '_func', '_ajax', '_error',
         function ($scope, $state, $stateParams, _log, _func, _ajax, _error) {
 
@@ -26,7 +26,7 @@
                     _ajax.post(sBackendUrl + 'partners/group/', {
                         'partnerName': ctrl.sPartnerName
                     }, function (oResponse) {
-                        $state.go('partnerGroups-list');
+                        $state.go('partners-list');
                     }, function (oResponse) {
                         ctrl.error.processResponse(oResponse);
                     });

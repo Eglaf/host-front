@@ -2,7 +2,7 @@
 
     'use strict';
 
-    app.controller('PartnerContactFormCtrl', [
+    app.controller('PartnersContactsFormCtrl', [
         '$scope', '$state', '$stateParams', '_log', '_func', '_ajax', '_error',
         function ($scope, $state, $stateParams, _log, _func, _ajax, _error) {
 
@@ -27,12 +27,12 @@
              * Submit form.
              */
             ctrl.submit = function () {
-                _log('PartnerContactFormCtrl submit');
+                _log('PartnersContactsFormCtrl submit');
 
                 ctrl.error.reset();
 
                 _ajax.post(sBackendUrl + 'partners/' + $stateParams.id + '/contact/', ctrl.oContact, function (oResponse) {
-                    $state.go('partner-contacts', {
+                    $state.go('partners-contacts', {
                         id: $stateParams.id
                     });
                 }, function (oResponse) {

@@ -1,0 +1,49 @@
+<ng-include src="'view/pre.html'"></ng-include>
+
+<h1>Partner customer host create</h1>
+
+<form class="content-box">
+
+    <ng-include src="'view/errors.html'"></ng-include>
+
+    <div class="form-group">
+        <label for="host">Host</label>
+        <input type="text" id="host" class="form-control" placeholder="Enter host" aria-describedby="hostHelp"
+               ng-model="ctrl.oForm.host">
+        <small id="hostHelp" class="form-text text-muted">Host.</small>
+    </div>
+
+    <div class="form-group">
+        <label for="type">Type</label>
+        <input type="password" id="type" class="form-control" placeholder="Enter type" aria-describedby="typeHelp"
+               ng-model="ctrl.oForm.type">
+        <small id="typeHelp" class="form-text text-muted">Type.</small>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" id="description" class="form-control" placeholder="Enter description" aria-describedby="descriptionHelp"
+               ng-model="ctrl.oForm.description">
+        <small id="descriptionHelp" class="form-text text-muted">Description.</small>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Status</label>
+        <input type="text" id="status" class="form-control" placeholder="Enter status" aria-describedby="statusHelp"
+               ng-model="ctrl.oForm.status">
+        <small id="statusHelp" class="form-text text-muted">Status.</small>
+    </div>
+
+    <button class="btn btn-primary"
+            ng-click="ctrl.submit()">
+        Save
+    </button>
+
+    <button class="btn btn-default"
+            ng-click="ctrl.goBack()">
+        Back
+    </button>
+
+</form>
+
+<ng-include src="'view/post.html'"></ng-include>

@@ -2,15 +2,15 @@
 
     'use strict';
 
-    app.controller('PartnerGroupsListCtrl', [
-        '$scope', '$state', '$stateParams', '$timeout', '$compile', '$filter', '_log', '_func', '_table', '_ajax', 'aoPartnerGroupsData',
-        function ($scope, $state, $stateParams, $timeout, $compile, $filter, _log, _func, _table, _ajax, aoPartnerGroupsData) {
+    app.controller('PartnersListCtrl', [
+        '$scope', '$state', '$stateParams', '$timeout', '$compile', '$filter', '_log', '_func', '_table', '_ajax', 'oSourceData',
+        function ($scope, $state, $stateParams, $timeout, $compile, $filter, _log, _func, _table, _ajax, oSourceData) {
 
             /** @type {object} This controller. */
             var ctrl = this;
 
             /** @type {object[]} Users. */
-            ctrl.aoPartnerGroupsData = aoPartnerGroupsData.data;
+            ctrl.aoData = oSourceData.data;
 
             /** @type {string} Name of current route state. */
             ctrl.sCurrentRoute = $state.current.name;
@@ -20,11 +20,11 @@
              */
             ctrl.initTable = function () {
 
-                _log(ctrl.aoPartnerGroupsData);
+                _log(ctrl.aoData);
 
                 _table
                     .setScope($scope)
-                    .setContainerElemId('_partnergroup_table_container')
+                    .setContainerElemId('_partners_table_container')
                     .setConfig({
                         orderByProperty: 'partnerName',
                         orderDirectionReversed: false,
@@ -43,14 +43,15 @@
                         func: function (oRow) {
                             var sButtons = '';
 
-                            sButtons += '<a ui-sref="partner-contacts({id:' + oRow.id + '})" class="btn btn-default btn-xs">Contacts</a> ';
-                            sButtons += '<a ui-sref="partnerGroups-customersList({partnerId:' + oRow.id + '})" class="btn btn-default btn-xs">Customers</a> ';
-                            sButtons += '<a ui-sref="partnerGroups-customersForm({partnerId:' + oRow.id + '})" class="btn btn-default btn-xs">Add customer</a>';
+                            sButtons += '<a ui-sref="partners-contactsList({id:' + oRow.id + '})" class="btn btn-default btn-xs">Contacts</a> ';
+                            sButtons += '<a ui-sref="partners-contactsForm({id:' + oRow.id + '})" class="btn btn-default btn-xs">Add contact</a> ';
+                            sButtons += '<a ui-sref="partners-customersList({partnerId:' + oRow.id + '})" class="btn btn-default btn-xs">Customers</a> ';
+                            sButtons += '<a ui-sref="partners-customersForm({partnerId:' + oRow.id + '})" class="btn btn-default btn-xs">Add customer</a>';
 
                             return sButtons;
                         }
                     }])
-                    .setContent(ctrl.aoPartnerGroupsData)
+                    .setContent(ctrl.aoData)
                     .loadTable();
             };
 

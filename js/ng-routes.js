@@ -1,20 +1,21 @@
 app.config(function ($stateProvider, $urlRouterProvider) {
 
     $stateProvider
+        // Auth
         .state('authenticate', {
             url: '/authenticate',
             templateUrl: 'view/authenticate.html',
             controller: 'AuthenticateCtrl',
             controllerAs: 'ctrl'
         })
-        // Dashboard.
+        // Dashboard
         .state('dashboard', {
             url: '/dashboard',
             templateUrl: 'view/dashboard.html',
             controller: 'DashboardCtrl',
             controllerAs: 'ctrl'
         })
-        // Users list.
+        // Users list
         .state('users-list', {
             url: '/user/list',
             templateUrl: 'view/users/list.html',
@@ -26,7 +27,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
-        // User form.
+        // User form
         .state('users-password-form', {
             url: '/user/{userId}/password-change',
             templateUrl: 'view/users/passwordForm.html',
@@ -38,7 +39,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
-        // User reports.
+        // User-report list
         .state('userReports-list', {
             url: '/user-reports/list',
             templateUrl: 'view/userReports/list.html',
@@ -50,6 +51,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
+        // User-report form
         .state('usersReports-flagForm', {
             url: '/user-reports/{userId}/flag-form',
             templateUrl: 'view/userReports/flagForm.html',
@@ -61,60 +63,118 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }]
             }
         })
-        // PartnerGroups and partners... is it the same or not? maybe... who knows...
-        .state('partnerGroups-list', {
-            url: '/partner-groups/list',
-            templateUrl: 'view/partnerGroups/list.html',
-            controller: 'PartnerGroupsListCtrl',
+
+        /*********************
+         * Partners
+         *********************/
+
+
+        // Partner list
+        .state('partners-list', {
+            url: '/partners/list',
+            templateUrl: 'view/partners/list.html',
+            controller: 'PartnersListCtrl',
             controllerAs: 'ctrl',
             resolve: {
-                aoPartnerGroupsData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
+                oSourceData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
                     return _ajax.get(sBackendUrl + 'partners/groups/');
                 }]
             }
         })
-        .state('partnerGroups-create', {
-            url: '/partner-groups/create',
-            templateUrl: 'view/partnerGroups/form.html',
-            controller: 'PartnerGroupFormCtrl',
+        // partner form
+        .state('partners-create', {
+            url: '/partners/create',
+            templateUrl: 'view/partners/form.html',
+            controller: 'PartnersFormCtrl',
             controllerAs: 'ctrl'
         })
-        // PartnerGroups - customers
-        .state('partnerGroups-customersList', {
-            url: '/partner-groups/{partnerId}/customers/list',
-            templateUrl: 'view/partnerGroups/customersList.html',
-            controller: 'PartnerGroupCustomersListCtrl',
-            controllerAs: 'ctrl',
-            resolve: {
-                aoPartnerGroupCustomersData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
-                    return _ajax.get(sBackendUrl + 'partners/' + $stateParams.partnerId  + '/groups/');
-                }]
-            }
-        })
-        .state('partnerGroups-customersForm', {
-            url: '/partner-groups/{partnerId}/customers/form',
-            templateUrl: 'view/partnerGroups/customersForm.html',
-            controller: 'PartnerGroupCustomersFormCtrl',
-            controllerAs: 'ctrl'
-        })
-        // Partners - contacts
-        .state('partner-contacts', {
-            url: '/partner/{id}/contacts/list',
+
+
+        // Partner/contact list
+        .state('partners-contactsList', {
+            url: '/partners/{id}/contacts/list',
             templateUrl: 'view/partners/contactsList.html',
-            controller: 'PartnerContactsListCtrl',
+            controller: 'PartnersContactsListCtrl',
             controllerAs: 'ctrl',
             resolve: {
-                aoPartnerContactsData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
+                oSourceData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
                     return _ajax.get(sBackendUrl + 'partners/' + $stateParams.id  + '/contacts/');
                 }]
             }
         })
-        .state('partner-contactForm', {
-            url: '/partner/{id}/contacts/create',
-            templateUrl: 'view/partners/contactForm.html',
-            controller: 'PartnerContactFormCtrl',
+        // Partner/contact form
+        .state('partners-contactsForm', {
+            url: '/partners/{id}/contacts/create',
+            templateUrl: 'view/partners/contactsForm.html',
+            controller: 'PartnersContactsFormCtrl',
             controllerAs: 'ctrl'
         })
+
+
+        // Partner/customer list
+        .state('partners-customersList', {
+            url: '/partners/{partnerId}/customers/list',
+            templateUrl: 'view/partners/customersList.html',
+            controller: 'PartnersCustomersListCtrl',
+            controllerAs: 'ctrl',
+            resolve: {
+                oSourceData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
+                    return _ajax.get(sBackendUrl + 'partners/' + $stateParams.partnerId  + '/groups/');
+                }]
+            }
+        })
+        // Partner/customer create
+        .state('partners-customersForm', {
+            url: '/partners/{partnerId}/customers/form',
+            templateUrl: 'view/partners/customersForm.html',
+            controller: 'PartnersCustomersFormCtrl',
+            controllerAs: 'ctrl'
+        })
+
+
+        // Partners/customers/contacts list
+        .state('partners-customers-contactsList', {
+            url: '/partners/{partnerId}/customers/{customerId}/contacts/list',
+            templateUrl: 'view/partners/customersContacts/list.html',
+            controller: 'PartnersCustomersContactsListCtrl',
+            controllerAs: 'ctrl',
+            resolve: {
+                oSourceData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
+                    return _ajax.get(sBackendUrl + 'customers/' + $stateParams.customerId  + '/contacts/');
+                }]
+            }
+        })
+        // Partners/customers/contacts create
+        .state('partners-customers-contactsForm', {
+            url: '/partners/{partnerId}/customers/{customerId}/contacts/create',
+            templateUrl: 'view/partners/customersContacts/form.html',
+            controller: 'PartnersCustomersContactsFormCtrl',
+            controllerAs: 'ctrl'
+        })
+
+        // Partners/customers/hosts list
+        .state('partners-customers-hostsList', {
+            url: '/partners/{partnerId}/customers/{customerId}/hosts/list',
+            templateUrl: 'view/partners/customersHosts/list.html',
+            controller: 'PartnersCustomersHostsListCtrl',
+            controllerAs: 'ctrl',
+            resolve: {
+                oSourceData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
+                    return _ajax.get(sBackendUrl + 'customer/' + $stateParams.customerId + '/');
+                }]
+            }
+        })
+        // Partners/customers/hosts create
+        .state('partners-customers-hostsForm', {
+            url: '/partners/{partnerId}/customers/{customerId}/hosts/create',
+            templateUrl: 'view/partners/customersHosts/form.html',
+            controller: 'PartnersCustomersHostsFormCtrl',
+            controllerAs: 'ctrl'
+        })
+
+
+
+
         // Host types
         .state('hostTypes-list', {
             url: '/host-types/list',
@@ -133,18 +193,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'HostTypeFormCtrl',
             controllerAs: 'ctrl'
         })
-        // Hosts
-        .state('hosts-list', {
-            url: '/customer/{customerId}/hosts/list',
-            templateUrl: 'view/hosts/list.html',
-            controller: 'HostListCtrl',
-            controllerAs: 'ctrl',
-            resolve: {
-                aoHostsData: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
-                    return _ajax.get(sBackendUrl + 'customer/' + $stateParams.customerId);
-                }]
-            }
-        })
+
+
     ;
 
     $urlRouterProvider.otherwise('/authenticate');

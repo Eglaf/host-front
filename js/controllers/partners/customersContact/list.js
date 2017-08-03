@@ -2,9 +2,9 @@
 
     'use strict';
 
-    app.controller('PartnersContactsListCtrl', [
-        '$rootScope', '$scope', '$state', '$stateParams', '$timeout', '$compile', '$filter', '_log', '_func', '_table', '_ajax', 'oSourceData',
-        function ($rootScope, $scope, $state, $stateParams, $timeout, $compile, $filter, _log, _func, _table, _ajax, oSourceData) {
+    app.controller('PartnersCustomersContactsListCtrl', [
+        '$scope', '$state', '$stateParams', '$timeout', '$compile', '$filter', '_log', '_func', '_table', '_ajax', 'oSourceData',
+        function ($scope, $state, $stateParams, $timeout, $compile, $filter, _log, _func, _table, _ajax, oSourceData) {
 
             /** @type {object} This controller. */
             var ctrl = this;
@@ -15,21 +15,19 @@
             /** @type {string} Name of current route state. */
             ctrl.sCurrentRoute = $state.current.name;
 
-            /** @type {number} No comment hack. */
-            ctrl.iStateParam = $stateParams.id;
+            ctrl.oStateParams = $stateParams;
 
             /**
              * Initialize.
              */
             ctrl.initTable = function () {
-
-                $rootScope.referrer = 'contacts';
+                var aoData = ctrl.aoData.customers.concat(ctrl.aoData.customers);
 
                 _table
                     .setScope($scope)
-                    .setContainerElemId('_partners_table_container')
+                    .setContainerElemId('partners_customers_contacts_table_container')
                     .setConfig({
-                        orderByProperty: 'contact',
+                        orderByProperty: 'partnerName',
                         orderDirectionReversed: false,
                         rowsOnPage: 5
                     })
@@ -37,7 +35,7 @@
                         globalSearchPlaceholder: 'Search'
                     })
                     .setColumns([{
-                        text: 'Name',
+                        text: 'Contact',
                         prop: 'contact',
                         search: 'string',
                         order: true
@@ -46,12 +44,15 @@
                         func: function (oRow) {
                             var sButtons = '';
 
-                            sButtons += '<a ui-sref="usersReports-flagForm({userId:' + oRow.id + '})" class="btn btn-default btn-xs">Reports</a> ';
+                           /* sButtons += '<a ui-sref="partners-customers-contactsList({id:' + oRow.id + '})" class="btn btn-default btn-xs">Contacts</a> ';
+                            sButtons += '<a ui-sref="partners-customers-contactsForm({id:' + oRow.id + '})" class="btn btn-default btn-xs">Add contact</a> ';
+                            sButtons += '<a ui-sref="partners-customersList({partnerId:' + oRow.id + '})" class="btn btn-default btn-xs">Customers</a> ';
+                            sButtons += '<a ui-sref="partners-customersForm({partnerId:' + oRow.id + '})" class="btn btn-default btn-xs">Add customer</a>';*/
 
                             return sButtons;
                         }
                     }])
-                    .setContent(ctrl.aoData)
+                    .setContent(aoData)
                     .loadTable();
             };
 
@@ -63,6 +64,10 @@
              */
             ctrl.callTableFunc = function (sFunc, xParam) {
                 return _table.callFromCtrl(sFunc, xParam);
+            };
+
+            ctrl.goBack = function () {
+                history.back();
             };
 
         }]);
