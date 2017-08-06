@@ -19,6 +19,7 @@
                 'host': '',
                 'type': '',
                 'description': '',
+                'customer': '',
                 'status': ''
             };
 

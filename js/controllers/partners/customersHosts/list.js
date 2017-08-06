@@ -52,27 +52,18 @@
                             search: 'string',
                             order:  true
                         }, {
-                            text:   'Status',
-                            func:   function (oRow) {
-                                return '-'
-                            },
-                            // search: 'string',
-                            order:  true
-                        }, {
                             text:   'Description',
                             prop:   'description',
                             search: 'string',
                             order:  true
-                        }/*, {
-                         text: '',
-                         func: function (oRow) {
-                         var sButtons = '';
-
-                         // sButtons += '<a ui-sref="usersReports-flagForm({userId:' + oRow.id + '})" class="btn btn-default btn-xs">Reports</a> ';
-
-                         return sButtons;
-                         }
-                         }*/])
+                        }, {
+                            text:   'Status',
+                            func:   function (oRow) {
+                                return 'status' + (Math.floor(Math.random() * 3) + 1);
+                            },
+                            // search: 'string',
+                            order:  true
+                        }])
                         .setContent(ctrl.aoData.hosts)
                         .loadTable();
                 }

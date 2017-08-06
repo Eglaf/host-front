@@ -32,7 +32,7 @@
 
                 ctrl.error.reset();
 
-                _ajax.post(sBackendUrl + 'customers/', ctrl.oCustomer, function (oResponse) {
+                _ajax.post(sBackendUrl + 'customers/', ctrl.oCustomer, function (oResponse) { // todo
                     $state.go('partners-customersList', {partnerId: params.partnerId});
                 }, function (oResponse) {
                     ctrl.error.processResponse(oResponse);
