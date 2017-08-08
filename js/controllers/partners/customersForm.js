@@ -21,7 +21,7 @@
             /** @type {object} Customer info. */
             ctrl.oCustomer = {
                 customerName: '',
-                groupId: $stateParams.partnerId
+                groupId: parseInt($stateParams.partnerId, 10)
             };
 
             /**
@@ -33,7 +33,7 @@
                 ctrl.error.reset();
 
                 _ajax.post(sBackendUrl + 'customers/', ctrl.oCustomer, function (oResponse) { // todo
-                    $state.go('partners-customersList', {partnerId: params.partnerId});
+                    $state.go('partners-customersList', {partnerId: ctrl.params.partnerId});
                 }, function (oResponse) {
                     ctrl.error.processResponse(oResponse);
                 });
