@@ -32,7 +32,7 @@
                 ctrl.error.reset();
 
                 _ajax.post(sBackendUrl + 'partners/' + $stateParams.id + '/contact/', ctrl.oContact, function (oResponse) {
-                    $state.go('partners-contacts', {
+                    $state.go('partners-contactsList', {
                         id: $stateParams.id
                     });
                 }, function (oResponse) {
