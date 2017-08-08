@@ -21,7 +21,7 @@
              * Initialize.
              */
             ctrl.initTable = function () {
-                var aoData = ctrl.aoData.customers.concat(ctrl.aoData.customers);
+                var aoData = ctrl.aoData.customers;
 
                 _table
                     .setScope($scope)
