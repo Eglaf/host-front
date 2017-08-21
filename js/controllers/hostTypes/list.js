@@ -37,7 +37,7 @@
                         globalSearchPlaceholder: 'Search'
                     })
                     .setColumns([{
-                        text: 'Name',
+                        text: 'Host types',
                         prop: 'name',
                         search: 'string',
                         order: true
