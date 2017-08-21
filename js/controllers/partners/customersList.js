@@ -31,7 +31,7 @@
                         globalSearchPlaceholder: 'Search'
                     })
                     .setColumns([{
-                        text:   'Name',
+                        text:   'Customers',
                         prop:   'name',
                         search: 'string',
                         order:  true

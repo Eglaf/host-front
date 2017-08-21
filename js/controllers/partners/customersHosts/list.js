@@ -27,9 +27,6 @@
 
                 if (ctrl.aoData) {
 
-                    console.log("\n aoData: \n");
-                    console.log(ctrl.aoData);
-
                     _table
                         .setScope($scope)
                         .setContainerElemId('_host_table_container')
@@ -42,24 +39,39 @@
                             globalSearchPlaceholder: 'Search'
                         })
                         .setColumns([{
-                            text:   'Name',
+                            text:   'Host',
                             prop:   'host',
                             search: 'string',
                             order:  true
                         }, {
-                            text:   'Type',
+                            text:   "Host's type",
                             prop:   'type',
                             search: 'string',
                             order:  true
                         }, {
                             text:   'Description',
-                            prop:   'description',
+                            // prop:   'description',
+                            func: function () { return '-' },
                             search: 'string',
                             order:  true
                         }, {
-                            text:   'Status',
+                            text:   'Status1',
                             func:   function (oRow) {
-                                return 'status' + (Math.floor(Math.random() * 3) + 1);
+                                return ctrl.getRandomStatus();
+                            },
+                            // search: 'string',
+                            order:  true
+                        }, {
+                            text:   'Status2',
+                            func:   function (oRow) {
+                                return ctrl.getRandomStatus();
+                            },
+                            // search: 'string',
+                            order:  true
+                        }, {
+                            text:   'Status3',
+                            func:   function (oRow) {
+                                return ctrl.getRandomStatus();
                             },
                             // search: 'string',
                             order:  true
@@ -85,6 +97,12 @@
             ctrl.goBack = function () {
                 history.back();
             };
+
+            ctrl.getRandomStatus = function () {
+                var asItems = ['Pending','Failed', 'Responding'];
+
+                return asItems[Math.floor(Math.random()*asItems.length)];
+            }
 
         }]);
 })();
