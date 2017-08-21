@@ -99,7 +99,10 @@
             };
 
             ctrl.getRandomStatus = function () {
-                var asItems = ['Pending','Failed', 'Responding'];
+                var s1 = '<a href="#" class="btn btn-success btn-xs" style="min-width:100px;">Responding</a>';
+                var s2 = '<a href="#" class="btn btn-warning btn-xs" style="min-width:100px;">Pending</a>';
+                var s3 = '<a href="#" class="btn btn-danger btn-xs" style="min-width:100px;">Failed</a>';
+                var asItems = [s1, s2, s1, s3, s1];
 
                 return asItems[Math.floor(Math.random()*asItems.length)];
             }
