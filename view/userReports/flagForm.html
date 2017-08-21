@@ -1,6 +1,6 @@
 <ng-include src="'view/pre.html'"></ng-include>
 
-<h1>User reports</h1>
+<h1>Reports</h1>
 
 <form class="content-box">
 
@@ -8,11 +8,18 @@
 
         <ng-include src="'view/errors.html'"></ng-include>
 
-        <label>Contact</label>
-        <input type="text" disabled="disabled" class="form-control" ng-value="ctrl.oUserData.contact"/>
+        <div class="form-group">
+            <label for="contact">Contact</label>
+            <input id="contact" type="text" disabled="disabled" class="form-control" ng-value="ctrl.oUserData.contact" aria-describedby="contactHelp"/>
+            <small id="contactHelp" class="form-text text-muted">(email)</small>
+        </div>
 
-        <label>Role</label>
-        <input type="text" disabled="disabled" class="form-control" ng-value="ctrl.oUserData.role"/>
+        <div class="form-group">
+            <label for="role">Role</label>
+            <input id="role" type="text" disabled="disabled" class="form-control" ng-value="ctrl.oUserData.role"/>
+        </div>
+
+        <hr />
 
         <table class="flagTable">
             <tbody>
@@ -64,6 +71,8 @@
             </tbody>
         </table>
     </div>
+
+    <hr />
 
     <button class="btn btn-primary"
             ng-click="ctrl.submit()">
