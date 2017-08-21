@@ -34,7 +34,7 @@
                         globalSearchPlaceholder: 'Search'
                     })
                     .setColumns([{
-                        text: 'Name',
+                        text: 'Partners',
                         prop: 'name',
                         search: 'string',
                         order: true
