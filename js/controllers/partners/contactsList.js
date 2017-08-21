@@ -37,7 +37,7 @@
                         globalSearchPlaceholder: 'Search'
                     })
                     .setColumns([{
-                        text: 'Name',
+                        text: 'Emails',
                         prop: 'contact',
                         search: 'string',
                         order: true
