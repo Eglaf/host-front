@@ -1,5 +1,65 @@
 <ng-include src="'view/pre.html'"></ng-include>
 
-<h1>Dashboard</h1>
+<h1>Service status</h1>
+<h2>All services</h2>
+
+<h3>Host status summary</h3>
+<table class="table">
+    <tr>
+        <td>Up</td>
+        <td>Down</td>
+        <td>Unreachable</td>
+        <td>Pending</td>
+    </tr>
+    <tr>
+        <td>|[ ctrl.oHostStatusSummary.up ]|</td>
+        <td>|[ ctrl.oHostStatusSummary.down ]|</td>
+        <td>|[ ctrl.oHostStatusSummary.unreachable ]|</td>
+        <td>|[ ctrl.oHostStatusSummary.pending ]|</td>
+    </tr>
+    <tr>
+        <td colspan="2">Unhandled</td>
+        <td>Problems</td>
+        <td>All</td>
+    </tr>
+    <tr>
+        <td colspan="2">|[ ctrl.oHostStatusSummary.unhandled ]|</td>
+        <td>|[ ctrl.oHostStatusSummary.problems ]|</td>
+        <td>|[ ctrl.oHostStatusSummary.all ]|</td>
+    </tr>
+</table>
+
+<h3>Service status summary</h3>
+<table class="table">
+    <tr>
+        <td>Ok</td>
+        <td>Warning</td>
+        <td>Unknown</td>
+        <td>Critical</td>
+        <td>Pending</td>
+    </tr>
+    <tr>
+        <td>|[ ctrl.oServiceStatusSummary.ok ]|</td>
+        <td>|[ ctrl.oServiceStatusSummary.warning ]|</td>
+        <td>|[ ctrl.oServiceStatusSummary.unknown ]|</td>
+        <td>|[ ctrl.oServiceStatusSummary.critical ]|</td>
+        <td>|[ ctrl.oServiceStatusSummary.pending ]|</td>
+    </tr>
+    <tr>
+        <td colspan="2">Unhandled</td>
+        <td colspan="2">Problems</td>
+        <td>All</td>
+    </tr>
+    <tr>
+        <td colspan="2">|[ ctrl.oServiceStatusSummary.unhandled ]|</td>
+        <td colspan="2">|[ ctrl.oServiceStatusSummary.problems ]|</td>
+        <td>|[ ctrl.oServiceStatusSummary.all ]|</td>
+    </tr>
+</table>
+
+<h3>Host status</h3>
+<div ng-init="ctrl.initTable();">
+    <div id="_table_host_service_container"></div>
+</div>
 
 <ng-include src="'view/post.html'"></ng-include>

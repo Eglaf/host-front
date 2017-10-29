@@ -3,8 +3,8 @@
     'use strict';
 
     app.controller('PartnersCustomersHostsFormCtrl', [
-        '$scope', '$state', '$stateParams', '_log', '_func', '_ajax', '_error',
-        function ($scope, $state, $stateParams, _log, _func, _ajax, _error) {
+        '$scope', '$state', '$stateParams', '_log', '_func', '_ajax', '_error', 'oHostTypes',
+        function ($scope, $state, $stateParams, _log, _func, _ajax, _error, oHostTypes) {
 
             /** @type {object} This controller. */
             var ctrl = this;
@@ -15,12 +15,16 @@
             /** @type {string} Name of current route state. */
             ctrl.sCurrentRoute = $state.current.name;
 
+            /** @type {object[]} Select options of hostTypes. */
+            ctrl.aoHostTypes = oHostTypes.data;
+
+            /** @type {object} Form data. */
             ctrl.oForm = {
-                'host': '',
-                'type': '',
-                'description': '',
-                'customer': '',
-                'status': ''
+                host: '',
+                type: '',
+                address: '',
+                alias: '',
+                description: ''
             };
 
             /**
@@ -31,23 +35,24 @@
 
                 ctrl.error.reset();
 
-                _log("TODO submit");
+                console.log(ctrl.oForm);
 
-               /* _ajax.post(sBackendUrl + 'customers/' + $stateParams.customerId + '/contact/', {
-                    "username":ctrl.oForm.userName,
-                    "password":ctrl.oForm.password,
-                    "fullName":ctrl.oForm.fullName,
-                    "phoneNumber":ctrl.oForm.phoneNumber,
-                    "customerId": $stateParams.customerId,
-                    "partnerId": $stateParams.partnerId
+               _ajax.post(sBackendUrl + 'customers/' + $stateParams.customerId + '/host/', {
+                   'host_name': ctrl.oForm.host,
+                   'hostTypeId': ctrl.oForm.type,
+                   'address': ctrl.oForm.address,
+                   'alias': ctrl.oForm.alias,
+                   'description': ctrl.oForm.description
                 }, function (oResponse) {
                     window.history.back();
-                    // $state.go('partnerGroups-list');
                 }, function (oResponse) {
                     ctrl.error.processResponse(oResponse);
-                });*/
+                });
             };
 
+            /**
+             * Go back.
+             */
             ctrl.goBack = function () {
                 history.back();
             };

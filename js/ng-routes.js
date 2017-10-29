@@ -169,7 +169,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/partners/{partnerId}/customers/{customerId}/hosts/create',
             templateUrl: 'view/partners/customersHosts/form.html',
             controller: 'PartnersCustomersHostsFormCtrl',
-            controllerAs: 'ctrl'
+            controllerAs: 'ctrl',
+            resolve: {
+                oHostTypes: ['$stateParams', '_ajax', function ($stateParams, _ajax) {
+                    return _ajax.get(sBackendUrl + 'hosttypes/');
+                }]
+            }
         })
 
 
